@@ -1,0 +1,20 @@
+{
+  "name": "hindsite",
+  "version": "1.0.0",
+  "description": "Hello!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JFole13/hindsite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JFole13/hindsite/issues"
+  },
+  "homepage": "https://github.com/JFole13/hindsite#readme"
+}

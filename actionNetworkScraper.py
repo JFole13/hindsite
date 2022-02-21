@@ -63,4 +63,4 @@ for game in content.find_all('tr'):
 
 
 with open('gameData.json', 'w') as outfile:
-    json.dump(gameArray, outfile)
+    json.dump(gameArray, outfile, indent=2)

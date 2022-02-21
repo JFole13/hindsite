@@ -1,6 +1,8 @@
 const express = require('express')
 const mysql = require('mysql')
 
+const {Team} = require("./parseEspnData.js")
+
 const app = express()
 
 // Create connection
@@ -9,114 +11,75 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'password',
-    database: 'scrapertestmysql'
+    database: 'espn_db'
 })
 
 // Connect
 db.connect((err) => {
-    if(err){
-        throw err
-    }
+    if(err) throw err
     console.log('MySQL Connected')
 })
 
 // Create DB
 app.get('/createdb', (req, res) => {
-    let sql = 'CREATE DATABASE scrapertestmysql'
+    let sql = 'CREATE DATABASE espn_db'
     db.query(sql, (err, result) =>{
-        if(err){
-            throw err
-        }
+        if(err) throw err
         console.log(result)
         res.send('Database created')
     })
 })
 
 // Create table
-app.get('/createpoststable', (req, res) => {
-    let sql = 'CREATE TABLE posts(id int AUTO_INCREMENT, title VARCHAR(255), body VARCHAR(255), PRIMARY KEY (id))'
+app.get('/createtable', (req, res) => {
+    let sql = 'CREATE TABLE nhl_data(id int AUTO_INCREMENT, team_name VARCHAR(255), record VARCHAR(255), PRIMARY KEY (id))'
 
     db.query(sql, (err, result) => {
-        if(err){
-            throw err
-        }
+        if(err) throw err
         console.log(result)
         res.send('Posts table created')
     })
 })
 
-// Insert post 1
-app.get('/addpost1', (req, res) => {
-    let post = {title: 'Post One', body: 'This is post 1'}
-    let sql = 'INSERT INTO posts SET ?'
-    let query = db.query(sql, post, (err, result) => {
-        if(err){
-            throw err
-        }
-        console.log(result)
-        res.send('Post 1 added')
-    })
-})
+// // Create table
+// app.get('/createteamtable/:name', (req, res) => {
+//     let sql = `CREATE TABLE ${req.params.name}(id int AUTO_INCREMENT, name VARCHAR(255), record VARCHAR(255), PRIMARY KEY (id))`
 
-// Insert post 2
-app.get('/addpost2', (req, res) => {
-    let post = {title: 'Post Two', body: 'This is post 2'}
-    let sql = 'INSERT INTO posts SET ?'
-    let query = db.query(sql, post, (err, result) => {
-        if(err){
-            throw err
-        }
-        console.log(result)
-        res.send('Post 2 added')
-    })
-})
+//     db.query(sql, (err, result) => {
+//         if(err) throw err
+//         console.log(result)
+//         res.send('Table created')
+//     })
+// })
 
 // Select posts
-app.get('/getposts', (req, res) => {
-    let sql = 'SELECT * FROM posts'
+app.get('/getteams', (req, res) => {
+    let sql = 'SELECT * FROM nhl_data'
     let query = db.query(sql, (err, results) => {
-        if(err){
-            throw err
-        }
+        if(err) throw err
         console.log(results)
         res.send('Posts fetched')
     })
 })
 
 // Select single post
-app.get('/getposts/:id', (req, res) => {
-    let sql = `SELECT * FROM posts WHERE id=${req.params.id}`
+app.get('/getteam/:id', (req, res) => {
+    let sql = `SELECT * FROM nhl_data WHERE id=${req.params.id}`
     let query = db.query(sql, (err, result) => {
-        if(err){
-            throw err
-        }
+        if(err) throw err
         console.log(result)
-        res.send('Posts fetched')
+        res.send('Post fetched')
     })
 })
 
 // Update posts
-app.get('/updatepost/:id', (req, res) => {
-    let newTitle = 'Updated Title'
-    let sql = `UPDATE posts SET title = '${newTitle}' WHERE id = ${req.params.id}`
+app.get('/updateteam/:name', (req, res) => {
+    let newRecord = Team.record
+    let sql = `UPDATE nhl_data SET record = '${newRecord}' WHERE team_name= '${req.params.name}'`
     let query = db.query(sql, (err, result) => {
-        if(err){
-            throw err
-        }
+        if(err) throw err
         console.log(result)
-        res.send('Posts updated')
-    })
-})
-
-// Delete posts
-app.get('/deletepost/:id', (req, res) => {
-    let sql = `DELETE FROM posts WHERE id = ${req.params.id}`
-    let query = db.query(sql, (err, result) => {
-        if(err){
-            throw err
-        }
-        console.log(result)
-        res.send('Post deleted')
+        res.send('Post updated')
     })
 })
 
