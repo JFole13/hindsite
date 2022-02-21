@@ -1,16 +1,55 @@
 const { jsonp } = require('express/lib/response');
+const mysql = require('mysql')
 let json = require('/Users/jesse/OneDrive/Desktop/projects/hindsite/espnData.json');
 
-// for(let i = 0; i < json.content.length; i++){
-    
-// }
+// Create connection
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
+    database: 'espn_db'
+})
 
-let Team = {
-    team_name : `${json.content[0].teamOneName}`,
-    record : `${json.content[0].teamOneRecord}`
+// Connect
+db.connect((err) => {
+    if(err) throw err
+    console.log('MySQL Connected')
+})
+
+let AwayTeam = {
+    name : 'name',
+    record : 'record'
 }
 
-module.exports = {Team}
+
+let HomeTeam = {
+    name : 'name',
+    record : 'record'
+}
+
+let sql
+
+for(let i = 0; i < json.content.length; i++){
+    AwayTeam.name = json.content[i].teamOneName
+    AwayTeam.record = json.content[i].teamOneRecord
+    HomeTeam.name = json.content[i].teamTwoName
+    HomeTeam.record = json.content[i].teamTwoRecord
+
+    sql = `UPDATE nhl_data SET record = '${AwayTeam.record}' WHERE team_name= '${AwayTeam.name}'`
+    
+    db.query(sql, function (err, result) {  
+        if (err) throw err;  
+        console.log("1 record updated");  
+    });  
+
+    sql = `UPDATE nhl_data SET record = '${HomeTeam.record}' WHERE team_name= '${HomeTeam.name}'`
+    
+    db.query(sql, function (err, result) {  
+        if (err) throw err;  
+        console.log("1 record updated");  
+    });  
 
 
-console.log(json.content[0].teamOneRecord);
+}
+
+// bounce back will require a win/loss counter

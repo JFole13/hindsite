@@ -356,7 +356,7 @@
       "sportUID": "s:70",
       "leagueUID": "s:70~l:90",
       "competitionUID": "s:70~l:90~e:401406978~c:401406978",
-      "gameState": "in",
+      "gameState": "post",
       "gameDate": "2022-02-21T00:00:00Z",
       "leagueName": "NHL",
       "gameId": 401406978,
@@ -368,6 +368,7 @@
       "teamOneLogoURLDark": "https://secure.espncdn.com/i/teamlogos/nhl/500-dark/scoreboard/dal.png",
       "teamOneAbbreviation": "DAL",
       "teamOneScore": "1",
+      "teamOneWinner": false,
       "teamOneAction": "sportscenter://x-callback-url/showClubhouse?uid=s:70~l:90~t:9&section=scores",
       "teamTwoName": "Coyotes",
       "teamTwoUID": "s:70~l:90~t:24",
@@ -375,10 +376,11 @@
       "teamTwoLogoURL": "https://secure.espncdn.com/i/teamlogos/nhl/500/scoreboard/ari.png",
       "teamTwoLogoURLDark": "https://secure.espncdn.com/i/teamlogos/nhl/500-dark/scoreboard/ari.png",
       "teamTwoAbbreviation": "ARI",
-      "teamTwoScore": "2",
+      "teamTwoScore": "3",
+      "teamTwoWinner": true,
       "teamTwoAction": "sportscenter://x-callback-url/showClubhouse?uid=s:70~l:90~t:24&section=scores",
       "headline": "DAL @ ARI",
-      "statusTextOne": "7:12 - 3rd",
+      "statusTextOne": "Final",
       "deepLinkURL": "sportscenter://x-callback-url/showGame?sportName=hockey&leagueAbbrev=nhl&gameId=401406978",
       "venue": {
         "name": "Gila River Arena",
@@ -401,8 +403,8 @@
       ],
       "webviewURL": "http://cdn.espn.com/hockey/app/gamepage/build?appName=sportscenter&platform=ios&feedVersion=12&sport=nhl&id=401406978",
       "share": {
-        "headline": "NHL: DAL 1 vs ARI 2",
-        "description": "NHL: DAL 1 vs ARI 2",
+        "headline": "NHL: DAL 1 vs ARI 3",
+        "description": "FINAL NHL: DAL 1 vs ARI 3",
         "link": {
           "action": {
             "url": "https://www.espn.com/nhl/boxscore/_/gameId/401406978",
@@ -412,21 +414,11 @@
           "text": "View Now"
         }
       },
-      "overrides": {
-        "gameDetails": {
-          "buttons": [
-            {
-              "text": "Stats",
-              "action": "http://www.espn.com/nhl/boxscore/_/gameId/401406978",
-              "type": "stats",
-              "color": "aaadb0"
-            }
-          ]
-        }
-      },
       "header": {
         "text": "NHL"
-      }
+      },
+      "teamOneRecord": "27-20-2, 56 PTS",
+      "teamTwoRecord": "13-33-4, 30 PTS"
     },
     {
       "sportName": "Ice Hockey",
@@ -434,7 +426,7 @@
       "sportUID": "s:70",
       "leagueUID": "s:70~l:90",
       "competitionUID": "s:70~l:90~e:401406979~c:401406979",
-      "gameState": "in",
+      "gameState": "post",
       "gameDate": "2022-02-21T01:00:00Z",
       "leagueName": "NHL",
       "gameId": 401406979,
@@ -445,7 +437,8 @@
       "teamOneLogoURL": "https://secure.espncdn.com/i/teamlogos/nhl/500/scoreboard/min.png",
       "teamOneLogoURLDark": "https://secure.espncdn.com/i/teamlogos/nhl/500-dark/scoreboard/min.png",
       "teamOneAbbreviation": "MIN",
-      "teamOneScore": "4",
+      "teamOneScore": "7",
+      "teamOneWinner": true,
       "teamOneAction": "sportscenter://x-callback-url/showClubhouse?uid=s:70~l:90~t:30&section=scores",
       "teamTwoName": "Oilers",
       "teamTwoUID": "s:70~l:90~t:6",
@@ -453,10 +446,11 @@
       "teamTwoLogoURL": "https://secure.espncdn.com/i/teamlogos/nhl/500/scoreboard/edm.png",
       "teamTwoLogoURLDark": "https://secure.espncdn.com/i/teamlogos/nhl/500-dark/scoreboard/edm.png",
       "teamTwoAbbreviation": "EDM",
-      "teamTwoScore": "1",
+      "teamTwoScore": "3",
+      "teamTwoWinner": false,
       "teamTwoAction": "sportscenter://x-callback-url/showClubhouse?uid=s:70~l:90~t:6&section=scores",
       "headline": "MIN @ EDM",
-      "statusTextOne": "14:41 - 2nd",
+      "statusTextOne": "Final",
       "deepLinkURL": "sportscenter://x-callback-url/showGame?sportName=hockey&leagueAbbrev=nhl&gameId=401406979",
       "venue": {
         "name": "Rogers Place",
@@ -479,8 +473,8 @@
       ],
       "webviewURL": "http://cdn.espn.com/hockey/app/gamepage/build?appName=sportscenter&platform=ios&feedVersion=12&sport=nhl&id=401406979",
       "share": {
-        "headline": "NHL: MIN 4 vs EDM 1",
-        "description": "NHL: MIN 4 vs EDM 1",
+        "headline": "NHL: MIN 7 vs EDM 3",
+        "description": "FINAL NHL: MIN 7 vs EDM 3",
         "link": {
           "action": {
             "url": "https://www.espn.com/nhl/boxscore/_/gameId/401406979",
@@ -490,21 +484,11 @@
           "text": "View Now"
         }
       },
-      "overrides": {
-        "gameDetails": {
-          "buttons": [
-            {
-              "text": "Stats",
-              "action": "http://www.espn.com/nhl/boxscore/_/gameId/401406979",
-              "type": "stats",
-              "color": "aaadb0"
-            }
-          ]
-        }
-      },
       "header": {
         "text": "NHL"
-      }
+      },
+      "teamOneRecord": "31-13-3, 65 PTS",
+      "teamTwoRecord": "28-19-3, 59 PTS"
     },
     {
       "sportName": "Ice Hockey",
@@ -512,7 +496,7 @@
       "sportUID": "s:70",
       "leagueUID": "s:70~l:90",
       "competitionUID": "s:70~l:90~e:401407036~c:401407036",
-      "gameState": "in",
+      "gameState": "post",
       "gameDate": "2022-02-21T01:00:00Z",
       "leagueName": "NHL",
       "gameId": 401407036,
@@ -523,7 +507,8 @@
       "teamOneLogoURL": "https://secure.espncdn.com/i/teamlogos/nhl/500/scoreboard/vgk.png",
       "teamOneLogoURLDark": "https://secure.espncdn.com/i/teamlogos/nhl/500-dark/scoreboard/vgk.png",
       "teamOneAbbreviation": "VGK",
-      "teamOneScore": "3",
+      "teamOneScore": "4",
+      "teamOneWinner": true,
       "teamOneAction": "sportscenter://x-callback-url/showClubhouse?uid=s:70~l:90~t:37&section=scores",
       "teamTwoName": "Sharks",
       "teamTwoUID": "s:70~l:90~t:18",
@@ -531,10 +516,11 @@
       "teamTwoLogoURL": "https://secure.espncdn.com/i/teamlogos/nhl/500/scoreboard/sj.png",
       "teamTwoLogoURLDark": "https://secure.espncdn.com/i/teamlogos/nhl/500-dark/scoreboard/sj.png",
       "teamTwoAbbreviation": "SJ",
-      "teamTwoScore": "0",
+      "teamTwoScore": "1",
+      "teamTwoWinner": false,
       "teamTwoAction": "sportscenter://x-callback-url/showClubhouse?uid=s:70~l:90~t:18&section=scores",
       "headline": "VGK @ SJ",
-      "statusTextOne": "12:55 - 2nd",
+      "statusTextOne": "Final",
       "deepLinkURL": "sportscenter://x-callback-url/showGame?sportName=hockey&leagueAbbrev=nhl&gameId=401407036",
       "venue": {
         "name": "SAP Center at San Jose",
@@ -557,8 +543,8 @@
       ],
       "webviewURL": "http://cdn.espn.com/hockey/app/gamepage/build?appName=sportscenter&platform=ios&feedVersion=12&sport=nhl&id=401407036",
       "share": {
-        "headline": "NHL: VGK 3 vs SJ 0",
-        "description": "NHL: VGK 3 vs SJ 0",
+        "headline": "NHL: VGK 4 vs SJ 1",
+        "description": "FINAL NHL: VGK 4 vs SJ 1",
         "link": {
           "action": {
             "url": "https://www.espn.com/nhl/boxscore/_/gameId/401407036",
@@ -568,21 +554,11 @@
           "text": "View Now"
         }
       },
-      "overrides": {
-        "gameDetails": {
-          "buttons": [
-            {
-              "text": "Stats",
-              "action": "http://www.espn.com/nhl/boxscore/_/gameId/401407036",
-              "type": "stats",
-              "color": "aaadb0"
-            }
-          ]
-        }
-      },
       "header": {
         "text": "NHL"
-      }
+      },
+      "teamOneRecord": "29-18-4, 62 PTS",
+      "teamTwoRecord": "22-22-5, 49 PTS"
     }
   ],
   "productAPIURL": "http://site.mobile.api.espn.com/apis/common/v2/event/header?lang=en&device=handset&platform=ios&profile=sportscenter_v1&sport=hockey&league=nhl&dates=2022&competitorlimit=5&showAirings=false"
