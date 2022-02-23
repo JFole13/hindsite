@@ -1,0 +1,68 @@
+[
+  {
+    "outcome": null,
+    "away_team": null,
+    "home_team": null,
+    "away_opening_odds": null,
+    "home_opening_odds": null,
+    "away_closing_odds": null,
+    "home_closing_odds": null,
+    "away_bets_percentage": null,
+    "home_bets_percentage": null
+  },
+  {
+    "outcome": "Final",
+    "away_team": "Jets",
+    "home_team": "Flames",
+    "away_opening_odds": "+160",
+    "home_opening_odds": "-213",
+    "away_closing_odds": "+210",
+    "home_closing_odds": "-230",
+    "away_bets_percentage": "22",
+    "home_bets_percentage": "78"
+  },
+  {
+    "outcome": "Final",
+    "away_team": "Avalanche",
+    "home_team": "Bruins",
+    "away_opening_odds": "-154",
+    "home_opening_odds": "+120",
+    "away_closing_odds": "-170",
+    "home_closing_odds": "+150",
+    "away_bets_percentage": "70",
+    "home_bets_percentage": "30"
+  },
+  {
+    "outcome": "Final - OT",
+    "away_team": "Hurricanes",
+    "home_team": "Flyers",
+    "away_opening_odds": "-213",
+    "home_opening_odds": "+160",
+    "away_closing_odds": "-210",
+    "home_closing_odds": "+210",
+    "away_bets_percentage": "73",
+    "home_bets_percentage": "27"
+  },
+  {
+    "outcome": "Final",
+    "away_team": "Maple Leafs",
+    "home_team": "Canadiens",
+    "away_opening_odds": "-278",
+    "home_opening_odds": "+210",
+    "away_closing_odds": "-375",
+    "home_closing_odds": "+350",
+    "away_bets_percentage": "64",
+    "home_bets_percentage": "36"
+  },
+  {
+    "outcome": "Final",
+    "away_team": "Kraken",
+    "home_team": "Canucks",
+    "away_opening_odds": "+135",
+    "home_opening_odds": "-175",
+    "away_closing_odds": "+165",
+    "home_closing_odds": "-176",
+    "away_bets_percentage": "26",
+    "home_bets_percentage": "74"
+  }
+]

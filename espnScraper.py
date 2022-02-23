@@ -8,7 +8,6 @@ def ppjson(data):
     print(json.dumps(data, indent=2, sort_keys=True))
 
 
-x = datetime.datetime(2022, 2, 20)
 
 url = espn.get_date_scoreboard_url("nhl", 2022)
 json_data = espn.get_url(url)

@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Jockey+One&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+}
+
+body{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background-color: #2A2B39;
+}
+
+#team-1-container{
+    grid-area: 1 / 1 / 1 / 4;
+    display: flex;
+    justify-content: end;
+    background: rgb(57,57,57);
+    background: linear-gradient(270deg, rgba(57,57,57,1) 0%, rgba(44,40,44,1) 100%, rgba(0,212,255,1) 100%);
+}
+
+#team-1-name-container{
+    width: 75%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+select{
+    font: 3.2rem 'Jockey One', sans-serif;
+    margin: 0 2rem;
+    background: transparent;
+    color: white;
+    border: none;
+}
+
+#team-1-name-container option, #team-2-name-container option{
+    font: 1.5rem 'Jockey One', sans-serif;
+    margin: 0 2rem;
+    color: black;
+    border: none;
+    background: none;
+}
+
+#team-1-img-container, #team-2-img-container{
+    width: 40%;
+    display: flex;
+    align-items: center;
+}
+
+img{
+    display: none;
+}
+
+#team-2-container{
+    grid-area: 1 / 4 / 1 / 7;
+    justify-content: end;
+    background: rgb(57,57,57);
+    background: linear-gradient(90deg, rgba(57,57,57,1) 0%, rgba(44,40,44,1) 100%, rgba(0,212,255,1) 100%);
+}
+
+#team-2-name-container{
+    width: 75%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+
+#team-1-ats-container{
+    background-color: blue;
+}
+
+#team-1-total-container{
+    background-color: white;
+}

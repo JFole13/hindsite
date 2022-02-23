@@ -20,37 +20,12 @@ db.connect((err) => {
     console.log('MySQL Connected')
 })
 
-// Create DB
-app.get('/createdb', (req, res) => {
-    let sql = 'CREATE DATABASE espn_db'
-    db.query(sql, (err, result) =>{
-        if(err) throw err
-        console.log(result)
-        res.send('Database created')
-    })
-})
-
-// Create table
-app.get('/createtable', (req, res) => {
-    let sql = 'CREATE TABLE nhl_data(id int AUTO_INCREMENT, team_name VARCHAR(255), record VARCHAR(255), PRIMARY KEY (id))'
-
-    db.query(sql, (err, result) => {
-        if(err) throw err
-        console.log(result)
-        res.send('Posts table created')
-    })
-})
-
-// // Create table
-// app.get('/createteamtable/:name', (req, res) => {
-//     let sql = `CREATE TABLE ${req.params.name}(id int AUTO_INCREMENT, name VARCHAR(255), record VARCHAR(255), PRIMARY KEY (id))`
-
-//     db.query(sql, (err, result) => {
-//         if(err) throw err
-//         console.log(result)
-//         res.send('Table created')
-//     })
-// })
+app.all('/', function(req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers")
+});
 
 // Select posts
 app.get('/getteams', (req, res) => {
@@ -63,12 +38,12 @@ app.get('/getteams', (req, res) => {
 })
 
 // Select single post
-app.get('/getteam/:id', (req, res) => {
-    let sql = `SELECT * FROM nhl_data WHERE id=${req.params.id}`
+app.get('/getteam/:name', (req, res) => {
+    let sql = `SELECT record, color FROM nhl_data WHERE team_name='${req.params.name}'`
     let query = db.query(sql, (err, result) => {
         if(err) throw err
         console.log(result)
-        res.send('Post fetched')
+        res.send(result)
     })
 })
 

@@ -3,7 +3,6 @@ import requests
 import json
 
 url = 'https://www.actionnetwork.com/nhl/public-betting'
-#url = 'https://ethans_fake_twitter_site.surge.sh/'
 response = requests.get(url, timeout=5)
 content = BeautifulSoup(response.content, "html.parser")
 
@@ -13,8 +12,13 @@ oddsArray = []
 for outcome in content.find_all('tr'):
     oddsArray = outcome.find_all('div', attrs={"class": "public-betting__open-cell"})
 
-# print(oddsArray)
-# print(oddsArray[0])
+
+def parseData(data):
+    if(data != 'None'):
+        locationofGreaterThan = data.index('>') + 1
+        locationofLessThan = data.index('<', 1, len(data))
+        prettyData = data[locationofGreaterThan:locationofLessThan]
+        return prettyData
 
 openingOddsArray = []
 closingOddsArray = []
@@ -47,20 +51,20 @@ for game in content.find_all('tr'):
         home_bets_percentage = betPercentageArray[1]
 
     gameObject = {
-        "outcome": str(game.find('div', attrs={"class": "public-betting__game-status"})),
-        "away_team": str(game.find('div', attrs={"class": "game-info__team--desktop"})),
-        "home_team": str(game.find('span', attrs={"class": "game-info__team--desktop"})),
-        "away_opening_odds": str(away_opening_odds),
-        "home_opening_odds": str(home_opening_odds),
-        "away_closing_odds": str(away_closing_odds),
-        "home_closing_odds": str(home_closing_odds),
-        "away_bets_percentage": str(away_bets_percentage),
-        "home_bets_percentage": str(home_bets_percentage)
+        "outcome": parseData(str(game.find('div', attrs={"class": "public-betting__game-status"}))),
+        "away_team": parseData(str(game.find('div', attrs={"class": "game-info__team--desktop"}))),
+        "home_team": parseData(str(game.find('span', attrs={"class": "game-info__team--desktop"}))),
+        "away_opening_odds": parseData(str(away_opening_odds)),
+        "home_opening_odds": parseData(str(home_opening_odds)),
+        "away_closing_odds": parseData(str(away_closing_odds)),
+        "home_closing_odds": parseData(str(home_closing_odds)),
+        "away_bets_percentage": parseData(str(away_bets_percentage)),
+        "home_bets_percentage": parseData(str(home_bets_percentage))
     }
     gameArray.append(gameObject)
     
     
 
 
-with open('gameData.json', 'w') as outfile:
+with open('actionNetworkData.json', 'w') as outfile:
     json.dump(gameArray, outfile, indent=2)
