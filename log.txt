@@ -8,3 +8,4 @@ Make sure typing style is consistent troughout all files
 Check for semicolons
 Hyphens in html
 Container names in html
+Colors in css use hex code

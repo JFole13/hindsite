@@ -70,12 +70,20 @@ img{
     align-items: center;
 }
 
-
-
-#team-1-ats-container{
-    background-color: blue;
+.data{
+    font: 1.5rem 'Jockey One', sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
-#team-1-total-container{
-    background-color: white;
+#team-1-container-1{
+}
+
+#team-1-container-2{
+}
+
+#team-1-container-3{
+    background-color: red;
 }

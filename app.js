@@ -58,6 +58,15 @@ app.get('/updateteam/:name', (req, res) => {
     })
 })
 
+app.get('/getpublic', (req, res) => {
+    let sql = 'SELECT ml_record_win, ml_record_loss FROM public_betting_data WHERE id=1'
+    let query = db.query(sql, (err, result) => {
+        if(err) throw err
+        console.log(result)
+        res.send(result)
+    })
+})
+
 app.listen('3000', () => {
     console.log('Server started on port 3000')
 })
