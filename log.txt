@@ -2,6 +2,11 @@
 Add Spacing around logo in team containers
 Have dropdown arrow move with team name
 
+Gotta look for even odds edge cases
+edge cases CHI -110 DAL -110, CHI -120 DAL -110
+will have to go through every function 
+
+
 // Finishing Touches
 Make sure spaces are consistent in css file
 Make sure typing style is consistent troughout all files
@@ -9,3 +14,6 @@ Check for semicolons
 Hyphens in html
 Container names in html
 Colors in css use hex code
+Import parsing functions from another file
+alphabetical in variable declaration, function call, etc.
+away/home declaration is consistent

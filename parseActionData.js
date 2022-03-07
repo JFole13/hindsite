@@ -19,8 +19,6 @@ db.connect((err) => {
 
 const espnData = espnjson.content
 
-
-
 let gameArray = []
 let gameObject
 for(let i = 0; i < espnData.length; i++){
@@ -52,6 +50,12 @@ let dog_ml_record_win = 0
 let dog_ml_record_loss = 0
 let dog_bets_ml_record_win = 0
 let dog_bets_ml_record_loss = 0
+let one_seventy_ml_record_win = 0
+let one_seventy_ml_record_loss = 0
+let two_hundred_ml_record_win = 0
+let two_hundred_ml_record_loss = 0
+let three_hundred_ml_record_win = 0
+let three_hundred_ml_record_loss = 0
 for(let i = 0; i < gameArray.length; i++){
     for(let j = 0; j < actionjson.length; j++){
         if(gameArray[i].away_team == actionjson[j].away_team){
@@ -64,6 +68,9 @@ for(let i = 0; i < gameArray.length; i++){
             updateCloseOddsML(gameArray[i], actionjson[j])
             updateDogsML(gameArray[i], actionjson[j])
             updateDogBetsML(gameArray[i], actionjson[j])
+            update170ML(gameArray[i],actionjson[j])
+            update200ML(gameArray[i],actionjson[j])
+            update300ML(gameArray[i],actionjson[j])
         }
     }
 }
@@ -105,25 +112,32 @@ function updateClosingVersusOpeningOdds(espnObject, actionObject){
         }else if(parseInt(actionObject.home_opening_odds) > parseInt(actionObject.home_closing_odds)){
             espnObject.home_win ? vs_ml_record_win++ : vs_ml_record_loss++
         }
-    }
-
-
-    if(actionObject.away_opening_odds.includes('-')){
-        if(parseInt(actionObject.away_opening_odds) > parseInt(actionObject.away_closing_odds)){
-            espnObject.away_win ? vs_ml_record_win++ : vs_ml_record_loss++
-        }
-    }else if(actionObject.home_opening_odds.includes('-')){
-        if(parseInt(actionObject.home_opening_odds) > parseInt(actionObject.home_closing_odds)){
-            espnObject.home_win ? vs_ml_record_win++ : vs_ml_record_loss++
+    }else{
+        if(actionObject.away_opening_odds.includes('-')){
+            if(parseInt(actionObject.away_opening_odds) > parseInt(actionObject.away_closing_odds)){
+                espnObject.away_win ? vs_ml_record_win++ : vs_ml_record_loss++
+            }
+        }else if(actionObject.home_opening_odds.includes('-')){
+            if(parseInt(actionObject.home_opening_odds) > parseInt(actionObject.home_closing_odds)){
+                espnObject.home_win ? vs_ml_record_win++ : vs_ml_record_loss++
+            }
         }
     }
 }
 
 function updateFavoritesML(espnObject, actionObject){
-    if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('+')){
-        espnObject.away_win ? favorite_ml_record_win++ : favorite_ml_record_loss++
-    }else if(actionObject.home_opening_odds.includes('-') && actionObject.away_opening_odds.includes('+')){
-        espnObject.home_win ? favorite_ml_record_win++ : favorite_ml_record_loss++
+    if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
+        if(parseInt(actionObject.away_opening_odds) < parseInt(actionObject.home_opening_odds)){
+            espnObject.away_win ? favorite_ml_record_win++ : favorite_ml_record_loss++
+        }else{
+            espnObject.home_win ? favorite_ml_record_win++ : favorite_ml_record_loss++
+        }
+    }else{
+        if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('+')){
+            espnObject.away_win ? favorite_ml_record_win++ : favorite_ml_record_loss++
+        }else if(actionObject.home_opening_odds.includes('-') && actionObject.away_opening_odds.includes('+')){
+            espnObject.home_win ? favorite_ml_record_win++ : favorite_ml_record_loss++
+        }
     }
 }
 
@@ -150,10 +164,18 @@ function updateCloseOddsML(espnObject, actionObject){
 }
 
 function updateDogsML(espnObject, actionObject){
-    if(actionObject.away_opening_odds.includes('+') && actionObject.home_opening_odds.includes('-')){
-        espnObject.away_win ? dog_ml_record_win++ : dog_ml_record_loss++
-    }else if(actionObject.home_opening_odds.includes('+') && actionObject.away_opening_odds.includes('-')){
-        espnObject.home_win ? dog_ml_record_win++ : dog_ml_record_loss++
+    if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
+        if(parseInt(actionObject.away_opening_odds) > parseInt(actionObject.home_opening_odds)){
+            espnObject.away_win ? dog_ml_record_win++ : dog_ml_record_loss++
+        }else{
+            espnObject.home_win ? dog_ml_record_win++ : dog_ml_record_loss++
+        }
+    }else{
+        if(actionObject.away_opening_odds.includes('+') && actionObject.home_opening_odds.includes('-')){
+            espnObject.away_win ? dog_ml_record_win++ : dog_ml_record_loss++
+        }else if(actionObject.home_opening_odds.includes('+') && actionObject.away_opening_odds.includes('-')){
+            espnObject.home_win ? dog_ml_record_win++ : dog_ml_record_loss++
+        }
     }
 }
 
@@ -169,13 +191,36 @@ function updateDogBetsML(espnObject, actionObject){
     }
 }
 
+function update170ML(espnObject, actionObject){
+    if(actionObject.away_opening_odds.includes('-') && Math.abs(parseInt(actionObject.away_opening_odds)) >= 170 && Math.abs(parseInt(actionObject.away_opening_odds)) < 200){
+        espnObject.away_win ? one_seventy_ml_record_win++ : one_seventy_ml_record_loss++
+    }else if(actionObject.home_opening_odds.includes('-') && Math.abs(parseInt(actionObject.home_opening_odds)) >= 170 && Math.abs(parseInt(actionObject.home_opening_odds)) < 200){
+        espnObject.home_win ? one_seventy_ml_record_win++ : one_seventy_ml_record_loss++
+    }
+}
+function update200ML(espnObject, actionObject){
+    if(actionObject.away_opening_odds.includes('-') && Math.abs(parseInt(actionObject.away_opening_odds)) >= 200 && Math.abs(parseInt(actionObject.away_opening_odds)) < 300){
+        espnObject.away_win ? two_hundred_ml_record_win++ : two_hundred_ml_record_loss++
+    }else if(actionObject.home_opening_odds.includes('-') && Math.abs(parseInt(actionObject.home_opening_odds)) >= 200 && Math.abs(parseInt(actionObject.home_opening_odds)) < 300){
+        espnObject.home_win ? two_hundred_ml_record_win++ : two_hundred_ml_record_loss++
+    }
+}
+
+function update300ML(espnObject, actionObject){
+    if(actionObject.away_opening_odds.includes('-') && Math.abs(parseInt(actionObject.away_opening_odds)) >= 300){
+        espnObject.away_win ? three_hundred_ml_record_win++ : three_hundred_ml_record_loss++
+    }else if(actionObject.home_opening_odds.includes('-') && Math.abs(parseInt(actionObject.home_opening_odds)) >= 300){
+        espnObject.home_win ? three_hundred_ml_record_win++ : three_hundred_ml_record_loss++
+    }
+}
+
+
 
 function sendData(){
     sql = 'SELECT * FROM public_betting_data'
 
     db.query(sql, function (err, result) {  
         if (err) throw err;  
-        console.log("Records selected"); 
         sql = `UPDATE public_betting_data SET ml_record_win = ${ml_record_win + result[0].ml_record_win},
                                          ml_record_loss = ${ml_record_loss + result[0].ml_record_loss}, 
                                          seventy_ml_record_win = ${seventy_ml_record_win + result[0].seventy_ml_record_win}, 
@@ -193,12 +238,18 @@ function sendData(){
                                          dog_ml_record_win = ${dog_ml_record_win + result[0].dog_ml_record_win},
                                          dog_ml_record_loss = ${dog_ml_record_loss + result[0].dog_ml_record_loss},
                                          dog_bets_ml_record_win = ${dog_bets_ml_record_win + result[0].dog_bets_ml_record_win},
-                                         dog_bets_ml_record_win = ${dog_bets_ml_record_loss + result[0].dog_bets_ml_record_loss}
+                                         dog_bets_ml_record_loss = ${dog_bets_ml_record_loss + result[0].dog_bets_ml_record_loss},
+                                         one_seventy_ml_record_win = ${one_seventy_ml_record_win + result[0].one_seventy_ml_record_win},
+                                         one_seventy_ml_record_loss = ${one_seventy_ml_record_loss + result[0].one_seventy_ml_record_loss},
+                                         two_hundred_ml_record_win = ${two_hundred_ml_record_win + result[0].two_hundred_ml_record_win},
+                                         two_hundred_ml_record_loss = ${two_hundred_ml_record_loss + result[0].two_hundred_ml_record_loss},
+                                         three_hundred_ml_record_win = ${three_hundred_ml_record_win + result[0].three_hundred_ml_record_win},
+                                         three_hundred_ml_record_loss = ${three_hundred_ml_record_loss + result[0].three_hundred_ml_record_loss}
                                          WHERE id = 1`
     
         db.query(sql, function (err, result) {  
             if (err) throw err;  
-            console.log("Records updated");  
+            console.log("Action Data records updated");  
         })  
     })
 }

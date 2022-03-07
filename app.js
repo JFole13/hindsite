@@ -2,6 +2,9 @@ const express = require('express')
 const mysql = require('mysql')
 
 const {Team} = require("./parseEspnData.js")
+const {Public} = require("./parseActionData.js")
+
+// require parseactiondata
 
 const app = express()
 
@@ -39,7 +42,7 @@ app.get('/getteams', (req, res) => {
 
 // Select single post
 app.get('/getteam/:name', (req, res) => {
-    let sql = `SELECT record, color FROM nhl_data WHERE team_name='${req.params.name}'`
+    let sql = `SELECT * FROM nhl_data WHERE team_name='${req.params.name}'`
     let query = db.query(sql, (err, result) => {
         if(err) throw err
         console.log(result)
@@ -59,7 +62,7 @@ app.get('/updateteam/:name', (req, res) => {
 })
 
 app.get('/getpublic', (req, res) => {
-    let sql = 'SELECT ml_record_win, ml_record_loss FROM public_betting_data WHERE id=1'
+    let sql = 'SELECT * FROM public_betting_data WHERE id=1'
     let query = db.query(sql, (err, result) => {
         if(err) throw err
         console.log(result)
