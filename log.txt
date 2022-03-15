@@ -3,7 +3,7 @@ Add Spacing around logo in team containers
 Have dropdown arrow move with team name
 
 Gotta look for even odds edge cases
-edge cases CHI -110 DAL -110, CHI -120 DAL -110
+edge cases CHI -110 DAL -110, CHI -120 DAL -110 betting 50 50
 will have to go through every function 
 
 

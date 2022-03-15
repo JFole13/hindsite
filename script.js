@@ -12,9 +12,9 @@ fetch('http://localhost:3000/getpublic')
 const publicDataLabels = ['ML', '70%> ML', '90%> ML', 'Close > Open', 'Favorites', 'Favorite Bets', 'Close Odds', 'Dogs', 
                     'Dog Bets', '-170> ML', '-200> ML', '-300> ML']
 
-const teamDataLabels = ['Home ML', 'Away ML', 'Away -170> ML', 'Home -170> ML', 'Away -200> ML', 'Home -200> ML', 'Away Over 6', 
-                        'Away Under 6', 'Home Over 6', 'Home Under 6', 'Away Puck Line', 'Home Puck Line', 'Away Rivals ML',
-                        'Home Rivals ML']
+const teamDataLabels = ['Away ML', 'Home ML', 'Away -170> ML', 'Home -170> ML', 'Away -200> ML', 'Home -200> ML', 'Away Over 6', 
+                        'Home Over 6', 'Away Puck Line', 'Home Puck Line', 'Away Rivals ML', 'Home Rivals ML', 'Away Fave ML', 
+                        'Home Fave ML', 'Away Dog ML', 'Home Dog ML']
 
 const PublicColor = '44,40,44,0'
 
@@ -93,9 +93,16 @@ function getTeamInfo(){
             return response.json()
         }).then(function(response){
             if(containerID == 'teams-1'){
+                document.getElementById('team-1-data-container').innerHTML = ''
+                teamContainer.style.background = `linear-gradient(270deg, rgba(57,57,57,1) 0%, rgba(${PublicColor}) 100%, rgba(0,212,255,1) 100%)`
                 document.getElementById('team-1-img').style.opacity = '0'
+                generateInitialDivs(response)
             }else{
+                document.getElementById('team-2-data-container').innerHTML = ''
+                teamContainer.style.background = `linear-gradient(90deg, rgba(57,57,57,1) 0%, rgba(${PublicColor}) 100%, rgba(0,212,255,1) 100%)`
                 document.getElementById('team-2-img').style.opacity = '0'
+                generateInitial2Divs(response)
+
             }
         }).catch(error => {
             throw error
@@ -134,7 +141,7 @@ function generateDivs(data){
 
     // count is for div naming
     let count = 1
-    for(i; i < Object.keys(data[0]).length / 2; i++){
+    for(i; i < Object.keys(data[0]).length / 2 + 1; i++){
         div = document.createElement('div')
         div.classList.add('data')
         div.id = 'team-1-container-' + count
@@ -144,9 +151,9 @@ function generateDivs(data){
         }
 
         h3 =  document.createElement('h3')
-        h3.innerHTML = dataLables[i - 1]
+        h3.innerHTML = dataLables[count - 1]
         p = document.createElement('p')
-        p.innerHTML = `${dataArray[2 * i - 2]} - ${dataArray[2 * i -1]}`
+        p.innerHTML = `${dataArray[2 * i - 3]} - ${dataArray[2 * i - 2]}`
         
         div.appendChild(h3)
         div.appendChild(p)
@@ -183,19 +190,19 @@ function generate2Divs(data){
 
     // count is for div naming
     let count = 1
-    for(i; i < Object.keys(data[0]).length / 2; i++){
+    for(i; i < Object.keys(data[0]).length / 2 + 1; i++){
         div = document.createElement('div')
         div.classList.add('data')
-        div.id = 'team-2-container-' + count
+        div.id = 'team-1-container-' + count
 
         if(count % 3 == 0){
             div.style.borderRight = '1px solid #3C3D4C'
         }
 
         h3 =  document.createElement('h3')
-        h3.innerHTML = dataLables[i - 1]
+        h3.innerHTML = dataLables[count - 1]
         p = document.createElement('p')
-        p.innerHTML = `${dataArray[2 * i - 2]} - ${dataArray[2 * i -1]}`
+        p.innerHTML = `${dataArray[2 * i - 3]} - ${dataArray[2 * i - 2]}`
         
         div.appendChild(h3)
         div.appendChild(p)

@@ -77,13 +77,16 @@ for(let i = 0; i < gameArray.length; i++){
 
 sendData()
 
-
+// bet percentages 50-50 check
+// open and closing odds are the same
 
 function updatePublicML(espnObject, actionObject){
-    if(actionObject.away_bets_percentage > actionObject.home_bets_percentage){
-        espnObject.away_win ? ml_record_win++ : ml_record_loss++
-    }else{
-        espnObject.home_win ? ml_record_win++ : ml_record_loss++
+    if(actionObject.away_bets_percentage != actionObject.home_bets_percentage){
+        if(actionObject.away_bets_percentage > actionObject.home_bets_percentage){
+            espnObject.away_win ? ml_record_win++ : ml_record_loss++
+        }else{
+            espnObject.home_win ? ml_record_win++ : ml_record_loss++
+        }
     }
 }
 
@@ -107,9 +110,11 @@ function updateClosingVersusOpeningOdds(espnObject, actionObject){
 
     // checks to see if they opened at even odds
     if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
-        if(parseInt(actionObject.away_opening_odds) > parseInt(actionObject.away_closing_odds)){
+        if(parseInt(actionObject.away_opening_odds) > parseInt(actionObject.away_closing_odds)
+            && actionObject.away_opening_odds != actionObject.home_opening_odds){
             espnObject.away_win ? vs_ml_record_win++ : vs_ml_record_loss++
-        }else if(parseInt(actionObject.home_opening_odds) > parseInt(actionObject.home_closing_odds)){
+        }else if(parseInt(actionObject.home_opening_odds) > parseInt(actionObject.home_closing_odds)
+            && actionObject.away_opening_odds != actionObject.home_opening_odds){
             espnObject.home_win ? vs_ml_record_win++ : vs_ml_record_loss++
         }
     }else{
@@ -129,7 +134,7 @@ function updateFavoritesML(espnObject, actionObject){
     if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
         if(parseInt(actionObject.away_opening_odds) < parseInt(actionObject.home_opening_odds)){
             espnObject.away_win ? favorite_ml_record_win++ : favorite_ml_record_loss++
-        }else{
+        }else if(parseInt(actionObject.home_opening_odds) < parseInt(actionObject.away_opening_odds)){
             espnObject.home_win ? favorite_ml_record_win++ : favorite_ml_record_loss++
         }
     }else{
@@ -142,33 +147,45 @@ function updateFavoritesML(espnObject, actionObject){
 }
 
 function updateFavoriteBetsML(espnObject, actionObject){
-    if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('+')){
+    if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
         if(actionObject.away_bets_percentage > actionObject.home_bets_percentage){
             espnObject.away_win ? favorite_bets_ml_record_win++ : favorite_bets_ml_record_loss++
         }
-    }else if(actionObject.home_opening_odds.includes('-') && actionObject.away_opening_odds.includes('+')){
-        if(actionObject.home_bets_percentage > actionObject.away_bets_percentage){
-            espnObject.home_win ? favorite_bets_ml_record_win++ : favorite_bets_ml_record_loss++
+    }else{
+        if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('+')){
+            if(actionObject.away_bets_percentage > actionObject.home_bets_percentage){
+                espnObject.away_win ? favorite_bets_ml_record_win++ : favorite_bets_ml_record_loss++
+            }
+        }else if(actionObject.home_opening_odds.includes('-') && actionObject.away_opening_odds.includes('+')){
+            if(actionObject.home_bets_percentage > actionObject.away_bets_percentage){
+                espnObject.home_win ? favorite_bets_ml_record_win++ : favorite_bets_ml_record_loss++
         }
+    }
     }
 }
 
 function updateCloseOddsML(espnObject, actionObject){
-    if(Math.abs(parseInt(actionObject.away_opening_odds) - parseInt(actionObject.home_opening_odds)) <= 25){
-        if(actionObject.away_bets_percentage > actionObject.home_bets_percentage){
-            espnObject.away_win ? close_ml_record_win++ : close_ml_record_loss++
-        }else{
-            espnObject.home_win ? close_ml_record_win++ : close_ml_record_loss++
+    // checks if both odds are close, and under 200
+    if(parseInt(actionObject.away_opening_odds) <= 140 && parseInt(actionObject.away_opening_odds) >= -140
+        && parseInt(actionObject.home_opening_odds) <= 140 && parseInt(actionObject.home_opening_odds) >= -140){
+        if(actionObject.away_bets_percentage != actionObject.home_bets_percentage){
+            if(actionObject.away_bets_percentage > actionObject.home_bets_percentage){
+                espnObject.away_win ? close_ml_record_win++ : close_ml_record_loss++
+            }else{
+                espnObject.home_win ? close_ml_record_win++ : close_ml_record_loss++
+            }
         }
     }
 }
 
 function updateDogsML(espnObject, actionObject){
     if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
-        if(parseInt(actionObject.away_opening_odds) > parseInt(actionObject.home_opening_odds)){
-            espnObject.away_win ? dog_ml_record_win++ : dog_ml_record_loss++
-        }else{
-            espnObject.home_win ? dog_ml_record_win++ : dog_ml_record_loss++
+        if(actionObject.away_opening_odds != actionObject.home_opening_odds){
+            if(parseInt(actionObject.away_opening_odds) > parseInt(actionObject.home_opening_odds)){
+                espnObject.away_win ? dog_ml_record_win++ : dog_ml_record_loss++
+            }else{
+                espnObject.home_win ? dog_ml_record_win++ : dog_ml_record_loss++
+            }
         }
     }else{
         if(actionObject.away_opening_odds.includes('+') && actionObject.home_opening_odds.includes('-')){
@@ -180,13 +197,23 @@ function updateDogsML(espnObject, actionObject){
 }
 
 function updateDogBetsML(espnObject, actionObject){
-    if(actionObject.away_opening_odds.includes('+') && actionObject.home_opening_odds.includes('-')){
-        if(actionObject.away_bets_percentage > actionObject.home_bets_percentage){
-            espnObject.away_win ? dog_bets_ml_record_win++ : dog_bets_ml_record_loss++
+    if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
+        if(actionObject.away_opening_odds != actionObject.home_opening_odds){
+            if(parseInt(actionObject.away_opening_odds) < parseInt(actionObject.home_opening_odds)){
+                espnObject.away_win ? dog_bets_ml_record_win++ : dog_bets_ml_record_loss++
+            }else{
+                espnObject.home_win ? dog_bets_ml_record_win++ : dog_bets_ml_record_loss++
+            }
         }
-    }else if(actionObject.home_opening_odds.includes('+') && actionObject.away_opening_odds.includes('-')){
-        if(actionObject.home_bets_percentage > actionObject.away_bets_percentage){
-            espnObject.home_win ? dog_bets_ml_record_win++ : dog_bets_ml_record_loss++
+    }else{
+        if(actionObject.away_opening_odds.includes('+') && actionObject.home_opening_odds.includes('-')){
+            if(actionObject.away_bets_percentage > actionObject.home_bets_percentage){
+                espnObject.away_win ? dog_bets_ml_record_win++ : dog_bets_ml_record_loss++
+            }
+        }else if(actionObject.home_opening_odds.includes('+') && actionObject.away_opening_odds.includes('-')){
+            if(actionObject.home_bets_percentage > actionObject.away_bets_percentage){
+                espnObject.home_win ? dog_bets_ml_record_win++ : dog_bets_ml_record_loss++
+            }
         }
     }
 }
