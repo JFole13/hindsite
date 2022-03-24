@@ -1,4 +1,5 @@
 const e = require('express');
+const res = require('express/lib/response');
 const { jsonp } = require('express/lib/response');
 const mysql = require('mysql')
 let actionjson = require('/Users/jesse/OneDrive/Desktop/projects/hindsite/actionNetworkData.json');
@@ -84,7 +85,10 @@ let away_dog_record_win = 0
 let away_dog_record_loss = 0
 let home_dog_record_win = 0
 let home_dog_record_loss = 0
-
+let team_away_ml_record_win = 0
+let team_away_ml_record_loss = 0
+let team_home_ml_record_win = 0
+let team_home_ml_record_loss = 0
 
 let awayWinArr = []
 let awayLossArr = []
@@ -128,6 +132,10 @@ let awayDogWinArr = []
 let awayDogLossArr = []
 let homeDogWinArr = []
 let homeDogLossArr = []
+let teamAwayWinArr = []
+let teamAwayLossArr = []
+let teamHomeWinArr = []
+let teamHomeLossArr = []
 
 for(let i = 0; i < gameArray.length; i++){
     for(let j = 0; j < actionjson.length; j++){
@@ -174,6 +182,11 @@ for(let i = 0; i < gameArray.length; i++){
             away_dog_record_loss = 0
             home_dog_record_win = 0
             home_dog_record_loss = 0
+            team_away_ml_record_win = 0
+            team_away_ml_record_loss = 0
+            team_home_ml_record_win = 0
+            team_home_ml_record_loss = 0
+
 
             updateTeamML(gameArray[i])
             updateTeam170ML(gameArray[i], actionjson[j])
@@ -186,6 +199,7 @@ for(let i = 0; i < gameArray.length; i++){
             //updateTeamFaveRivals(gameArray[i], actionjson[j])
             updateTeamFaveML(gameArray[i], actionjson[j])
             updateTeamDogML(gameArray[i], actionjson[j])
+            updateSelectedTeamML(gameArray[i])
         }
     }
 }
@@ -385,6 +399,26 @@ function updateTeamDogML(espnObject, actionObject){
     homeDogLossArr.push(home_dog_record_loss)
 }
 
+function updateSelectedTeamML(espnObject){
+    if(espnObject.away_win){
+        team_away_ml_record_win++
+        team_home_ml_record_loss++
+    }else{
+        team_away_ml_record_loss++
+        team_home_ml_record_win++
+    }
+
+    teamAwayWinArr.push(team_away_ml_record_win)
+    teamAwayLossArr.push(team_away_ml_record_loss)
+    teamHomeWinArr.push(team_home_ml_record_win)
+    teamHomeLossArr.push(team_home_ml_record_loss)
+
+
+
+}
+
+
+
 // function updateTeamFaveRivals(espnObject, actionObject){
 //     if(central.includes(espnObject.away_team) && central.includes(espnObject.home_team) && espnObject.away_opening_odds.includes('-')){
 //         if(espnObject.away_win){
@@ -394,16 +428,23 @@ function updateTeamDogML(espnObject, actionObject){
 // }
 
 function sendHomeAwayData(){
-    console.log(awayFaveWinArr)
-    console.log(awayFaveLossArr)
-    console.log(homeFaveWinArr)
-    console.log(homeFaveLossArr)
+    console.log(teamAwayWinArr)
+    console.log(teamAwayLossArr)
+    console.log(teamHomeWinArr)
+    console.log(teamHomeLossArr)
 
 
 
     for(let i = 0; i < gameArray.length; i++){
 
         let sql = `SELECT * FROM nhl_data where team_name = '${gameArray[i].away_team}'`
+
+        let tempTeam = gameArray[i].home_team.toLowerCase().replace(' ', '_')
+        console.log(tempTeam)
+        // = tempTeam.join('_').toLowerCase()
+        let opposingTeamWin = `home_ml_${tempTeam}_record_win`
+        let opposingTeamLoss = `home_ml_${tempTeam}_record_loss`
+
 
         db.query(sql, function (err, result) {  
                     if (err) throw err;  
@@ -426,9 +467,10 @@ function sendHomeAwayData(){
                                                away_fave_record_win = ${awayFaveWinArr[i] + result[0].away_fave_record_win},
                                                away_fave_record_loss = ${awayFaveLossArr[i] + result[0].away_fave_record_loss},
                                                away_dog_record_win = ${awayDogWinArr[i] + result[0].away_dog_record_win},
-                                               away_dog_record_loss = ${awayDogLossArr[i] + result[0].away_dog_record_loss}
-                                                 
-                            
+                                               away_dog_record_loss = ${awayDogLossArr[i] + result[0].away_dog_record_loss},
+                                               away_ml_${tempTeam}_record_win = ${teamAwayWinArr[i] + result[0][opposingTeamWin]},
+                                               away_ml_${tempTeam}_record_loss = ${teamAwayLossArr[i] + result[0][opposingTeamLoss]} 
+                                               
                             WHERE team_name = '${gameArray[i].away_team}'`
 
                             // total_games = ${1 + result[0].total_games},
@@ -446,6 +488,14 @@ function sendHomeAwayData(){
     for(let i = 0; i < gameArray.length; i++){
 
         let sql = `SELECT * FROM nhl_data where team_name = '${gameArray[i].home_team}'`
+
+        let tempTeam = gameArray[i].away_team.toLowerCase().replace(' ', '_')
+        console.log(tempTeam)
+
+
+        let opposingTeamWin = `away_ml_${tempTeam}_record_win`
+        let opposingTeamLoss = `away_ml_${tempTeam}_record_loss`
+
 
         db.query(sql, function (err, result) {  
                     if (err) throw err;  
@@ -466,7 +516,10 @@ function sendHomeAwayData(){
                                                home_fave_record_win = ${homeFaveWinArr[i] + result[0].home_fave_record_win},
                                                home_fave_record_loss = ${homeFaveLossArr[i] + result[0].home_fave_record_loss},
                                                home_dog_record_win = ${homeDogWinArr[i] + result[0].home_dog_record_win},
-                                               home_dog_record_loss = ${homeDogLossArr[i] + result[0].home_dog_record_loss}
+                                               home_dog_record_loss = ${homeDogLossArr[i] + result[0].home_dog_record_loss},
+                                               home_ml_${tempTeam}_record_win = ${teamHomeWinArr[i] + result[0][opposingTeamWin]},
+                                               home_ml_${tempTeam}_record_loss = ${teamHomeLossArr[i] + result[0][opposingTeamLoss]}
+                                            
                                                
                                                
                             WHERE team_name = '${gameArray[i].home_team}'`

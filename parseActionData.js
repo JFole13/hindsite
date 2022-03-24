@@ -246,32 +246,34 @@ function update300ML(espnObject, actionObject){
 function sendData(){
     sql = 'SELECT * FROM public_betting_data'
 
+    const test = '.200_ml_record_win'
+
     db.query(sql, function (err, result) {  
         if (err) throw err;  
         sql = `UPDATE public_betting_data SET ml_record_win = ${ml_record_win + result[0].ml_record_win},
                                          ml_record_loss = ${ml_record_loss + result[0].ml_record_loss}, 
-                                         seventy_ml_record_win = ${seventy_ml_record_win + result[0].seventy_ml_record_win}, 
-                                         seventy_ml_record_loss = ${seventy_ml_record_loss + result[0].seventy_ml_record_loss},
-                                         ninety_ml_record_win = ${ninety_ml_record_win + result[0].ninety_ml_record_win},
-                                         ninety_ml_record_loss = ${ninety_ml_record_loss + result[0].ninety_ml_record_loss},
-                                         vs_ml_record_win = ${vs_ml_record_win + result[0].vs_ml_record_win},
-                                         vs_ml_record_loss = ${vs_ml_record_loss + result[0].vs_ml_record_loss},
+                                         _70_ml_record_win = ${seventy_ml_record_win + result[0]._70_ml_record_win}, 
+                                         _70_ml_record_loss = ${seventy_ml_record_loss + result[0]._70_ml_record_loss},
+                                         _90_ml_record_win = ${ninety_ml_record_win + result[0]._90_ml_record_win},
+                                         _90_ml_record_loss = ${ninety_ml_record_loss + result[0]._90_ml_record_loss},
+                                         close_open_record_win = ${vs_ml_record_win + result[0].close_open_record_win},
+                                         close_open_record_loss = ${vs_ml_record_loss + result[0].close_open_record_loss},
                                          favorite_ml_record_win = ${favorite_ml_record_win + result[0].favorite_ml_record_win},
                                          favorite_ml_record_loss = ${favorite_ml_record_loss + result[0].favorite_ml_record_loss},
                                          favorite_bets_ml_record_win = ${favorite_bets_ml_record_win + result[0].favorite_bets_ml_record_win},
                                          favorite_bets_ml_record_loss = ${favorite_bets_ml_record_loss + result[0].favorite_bets_ml_record_loss},
-                                         close_ml_record_win = ${close_ml_record_win + result[0].close_ml_record_win},
-                                         close_ml_record_loss = ${close_ml_record_loss + result[0].close_ml_record_loss},
+                                         close_odds_record_win = ${close_ml_record_win + result[0].close_odds_record_win},
+                                         close_odds_record_loss = ${close_ml_record_loss + result[0].close_odds_record_loss},
                                          dog_ml_record_win = ${dog_ml_record_win + result[0].dog_ml_record_win},
                                          dog_ml_record_loss = ${dog_ml_record_loss + result[0].dog_ml_record_loss},
                                          dog_bets_ml_record_win = ${dog_bets_ml_record_win + result[0].dog_bets_ml_record_win},
                                          dog_bets_ml_record_loss = ${dog_bets_ml_record_loss + result[0].dog_bets_ml_record_loss},
-                                         one_seventy_ml_record_win = ${one_seventy_ml_record_win + result[0].one_seventy_ml_record_win},
-                                         one_seventy_ml_record_loss = ${one_seventy_ml_record_loss + result[0].one_seventy_ml_record_loss},
-                                         two_hundred_ml_record_win = ${two_hundred_ml_record_win + result[0].two_hundred_ml_record_win},
-                                         two_hundred_ml_record_loss = ${two_hundred_ml_record_loss + result[0].two_hundred_ml_record_loss},
-                                         three_hundred_ml_record_win = ${three_hundred_ml_record_win + result[0].three_hundred_ml_record_win},
-                                         three_hundred_ml_record_loss = ${three_hundred_ml_record_loss + result[0].three_hundred_ml_record_loss}
+                                         _170_ml_record_win = ${one_seventy_ml_record_win + result[0]._170_ml_record_win},
+                                         _170_ml_record_loss = ${one_seventy_ml_record_loss + result[0]._170_ml_record_loss},
+                                         _200_ml_record_win = ${two_hundred_ml_record_win + result[0]._200_ml_record_win},
+                                         _200_ml_record_loss = ${two_hundred_ml_record_loss + result[0]._200_ml_record_loss},
+                                         _300_ml_record_win = ${three_hundred_ml_record_win + result[0]._300_ml_record_win},
+                                         _300_ml_record_loss = ${three_hundred_ml_record_loss + result[0]._300_ml_record_loss}
                                          WHERE id = 1`
     
         db.query(sql, function (err, result) {  

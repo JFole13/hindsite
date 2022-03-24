@@ -14,7 +14,6 @@ body{
 }
 
 #team-1-name-container{
-    height: 25%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -23,7 +22,6 @@ body{
 }
 
 #team-2-name-container{
-    height: 25%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -39,6 +37,10 @@ select{
     border: none;
 }
 
+select:hover{
+    cursor: pointer;
+}
+
 #team-1-name-container option, #team-2-name-container option{
     font: 1.5rem 'Jockey One', sans-serif;
     margin: 0 2rem;
@@ -51,7 +53,7 @@ img{
     opacity: 0;
     height: 75px;
     width: 75px;
-    margin: 0 0 0 2.5rem;
+    margin: .5rem 0 .5rem 2.5rem;
 }
 
 
@@ -61,6 +63,11 @@ img{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.disabled{
+    color: darkgrey;
+    background: grey; 
 }
 
 #team-1-data-container, #team-2-data-container{
