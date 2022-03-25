@@ -1,6 +1,6 @@
 const { jsonp } = require('express/lib/response');
 const mysql = require('mysql')
-let actionjson = require('/Users/jesse/OneDrive/Desktop/projects/hindsite/actionNetworkData.json');
+let actionjson = require('/Users/jesse/OneDrive/Desktop/projects/hindsite/testData.json');
 let espnjson = require('/Users/jesse/OneDrive/Desktop/projects/hindsite/espnData.json') 
 
 // Create connection

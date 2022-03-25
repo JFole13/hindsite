@@ -3,13 +3,14 @@ fetch('http://localhost:3000/getpublic')
         .then(function(response){
             return response.json()
         }).then(function(response){
+
             generateInitialDivs(response)
 
             fetch('http://localhost:3000/getteams')
                 .then(function(response2){
                     return response2.json()
                 }).then(function(response2){
-                    getTrending2(response, response2)
+                    //getTrending2(response, response2)
                 }).catch(error => {
                     throw error
                 });
@@ -139,11 +140,28 @@ function getTeamInfo(){
                     .then(function(response2){
                         return response2.json()
                     }).then(function(response2){
-                        getTrending(response, response2)
+                        //getTrending(response, response2)
                     }).catch(error => {
                         throw error
                     });
                 }else{
+
+                    let ele = document.getElementById('teams-2')
+
+                    for (let i = 0; i < ele.length; i++) {
+                        if (ele[i].childNodes[0].nodeValue.toLowerCase().includes(ele.value.toLowerCase().replace('_', ' '))){
+                            
+                            document.getElementById('teams-1').options[i].disabled = true
+                        }else{
+                            document.getElementById('teams-1').options[i].disabled = false
+    
+                        }
+                    }
+
+                    console.log(ele[0].childNodes[0].nodeValue.toLowerCase())
+                    console.log(ele.value)
+
+
                     generateInitialDivs(response)
                 }
             }else{
@@ -156,11 +174,23 @@ function getTeamInfo(){
                     .then(function(response2){
                         return response2.json()
                     }).then(function(response2){
-                        getTrending2(response, response2)
+                        //getTrending2(response, response2)
                     }).catch(error => {
                         throw error
                     });
                 }else{
+
+                    let ele = document.getElementById('teams-2')
+
+                    for (let i = 0; i < ele.length; i++) {
+                        if (ele[i].childNodes[0].nodeValue.toLowerCase().includes(ele.value.toLowerCase().replace('_', ' '))){
+                            document.getElementById('teams-1').options[i].disabled = true
+                        }else{
+                            document.getElementById('teams-1').options[i].disabled = false
+    
+                        }
+                    }
+
                     generateInitial2Divs(response)
                 }
 
@@ -207,8 +237,8 @@ function generateDivs(data){
 
 
     let containerCount
-    if(teamName != 'trends' && teamName != 'public'){
-        containerCount = 21
+    if(teamName != 'trending' && teamName != 'public'){
+        containerCount = 23
     }else{
         containerCount = 19
     }
@@ -277,28 +307,36 @@ function generateDivs(data){
             team = team.charAt(0).toUpperCase() + teamName.slice(1)
         }
 
-        if(team != 'Trends' && team != 'Public'){
+        if(team != 'Trending' && team != 'Public'){
             fetch(`http://localhost:3000/getteam/${team}`)
             .then(function(response){
                 return response.json()
             }).then(function(response){
                 console.log(response)
 
-                for(let j = 16; j < 18; j++){
+                for(let j = 16; j < 20; j++){
                     if(document.getElementById('team-2-data-container').contains(document.getElementById('team-2-container-' + j))){
                         document.getElementById('team-2-container-' +  j).remove()
                     }
                 }
 
                 let anotherCount = 0
-                for(let i = 16; i < 18; i++){
+                for(let i = 16; i < 20; i++){
 
                     
 
 
                     let words = dataLables[anotherCount].split(' ')
-                    let word1 = words[0].toLowerCase()
-                    let word2 = words[1].toLowerCase()
+                    
+                    let label = ''
+                    for(let x = 0; x < words.length; x++){
+    
+                        label += words[x].toLowerCase() + '_'
+                        label = label.replace('-', '')
+                        label = label.replace('>', '')
+                        
+                    }    
+
 
                     let div = document.createElement('div')
                     div.id = 'team-2-container-' + i
@@ -306,7 +344,6 @@ function generateDivs(data){
                     document.getElementById('team-2-data-container').appendChild(div)
                     div.appendChild(document.createElement('h3'))
                     div.appendChild(document.createElement('p'))
-                    
 
                     let teamNameforOpposingHeaders = document.getElementById('teams-1').value 
                     console.log(teamNameforOpposingHeaders)
@@ -319,8 +356,8 @@ function generateDivs(data){
                         div.firstChild.innerHTML = dataLables[anotherCount] + ` (${teamNameforOpposingHeaders.charAt(0).toUpperCase() + teamNameforOpposingHeaders.slice(1)})`
                     }
                         
-                    let request1 = `${word1}_${word2}_${teamNameforOpposingHeaders}_record_win`
-                    let request2 = `${word1}_${word2}_${teamNameforOpposingHeaders}_record_loss`
+                    let request1 = `${label}${teamNameforOpposingHeaders}_record_win`
+                    let request2 = `${label}${teamNameforOpposingHeaders}_record_loss`
                 
                     div.lastChild.innerHTML = `${response[0][request1]} - ${response[0][request2]}`
 
@@ -366,14 +403,10 @@ function generate2Divs(data){
     // count is for div naming
     let idCount = 0
     let count = 1
-    for(i; i < 21; i++){
+    for(i; i < 23; i++){
         div = document.createElement('div')
         div.classList.add('data')
         div.id = 'team-2-container-' + idCount
-
-        if(count % 3 == 0){
-            div.style.borderRight = '1px solid #3C3D4C'
-        }
 
         h3 =  document.createElement('h3')
 
@@ -433,19 +466,28 @@ function generate2Divs(data){
             return response.json()
         }).then(function(response){
 
-            for(let j = 16; j < 18; j++){
+            for(let j = 16; j < 20; j++){
                 if(document.getElementById('team-1-data-container').contains(document.getElementById('team-1-container-' + j))){
                  document.getElementById('team-1-container-' + j).remove()
                 }
             }
 
             let anotherCount = 0
-            for(let i = 16; i < 18; i++){
+            for(let i = 16; i < 20; i++){
 
 
                 let words = dataLables[anotherCount].split(' ')
-                let word1 = words[0].toLowerCase()
-                let word2 = words[1].toLowerCase()
+
+                let label = ''
+                for(let x = 0; x < words.length; x++){
+
+                    label += words[x].toLowerCase() + '_'
+                    label = label.replace('-', '')
+                    label = label.replace('>', '')
+                    
+                }
+
+
 
                 let div = document.createElement('div')
                 div.id = 'team-1-container-' + i
@@ -470,8 +512,9 @@ function generate2Divs(data){
                 }
                 
                 
-                let request1 = `${word1}_${word2}_${teamNameforOpposingHeaders}_record_win`
-                let request2 = `${word1}_${word2}_${teamNameforOpposingHeaders}_record_loss`
+                let request1 = `${label}${teamNameforOpposingHeaders}_record_win`
+                let request2 = `${label}${teamNameforOpposingHeaders}_record_loss`
+
             
                 div.lastChild.innerHTML = `${response[0][request1]} - ${response[0][request2]}`
 
@@ -485,7 +528,7 @@ function generate2Divs(data){
 
 function generateInitialDivs(data){
 
-    for(let j = 16; j < 18; j++){
+    for(let j = 16; j < 20; j++){
         if(document.getElementById('team-2-data-container').contains(document.getElementById('team-2-container-' + j))){
             document.getElementById('team-2-container-' +  j).remove()
         }
@@ -537,7 +580,7 @@ function generateInitialDivs(data){
 
 function generateInitial2Divs(data){
 
-    for(let j = 16; j < 18; j++){
+    for(let j = 16; j < 20; j++){
         if(document.getElementById('team-1-data-container').contains(document.getElementById('team-1-container-' + j))){
             document.getElementById('team-1-container-' +  j).remove()
         }
@@ -589,7 +632,7 @@ function generateInitial2Divs(data){
 // gonna have to manipulate data within here (gonna be like functions above)
 function getTrending(publicData, teamData){
 
-    for(let j = 16; j < 18; j++){
+    for(let j = 16; j < 20; j++){
         if(document.getElementById('team-2-data-container').contains(document.getElementById('team-2-container-' + j))){
             document.getElementById('team-2-container-' +  j).remove()
         }
@@ -650,13 +693,12 @@ function getTrending(publicData, teamData){
         h3 =  document.createElement('h3')
 
         let title = sortedPercentagesArr[i].title.split("_")
-
-        console.log(title)
+    
         for (let i = 0; i < title.length; i++) {
             if(title[i] == "ml"){
                 title[i] = title[i][0].toUpperCase() + title[i][1].toUpperCase()
             }else if(title[i] == ''){
-                console.log(title[i])
+                
             }else{
                 title[i] = title[i][0].toUpperCase() + title[i].substr(1);
             }
@@ -670,7 +712,7 @@ function getTrending(publicData, teamData){
         }else{
             temp = title[0] + " " + title[1]
         }
-            console.log(temp)
+            
         h3.innerHTML = temp
         p = document.createElement('p')
         p.innerHTML = `${Math.round(sortedPercentagesArr[i].percentage * 100)}%`
@@ -682,17 +724,17 @@ function getTrending(publicData, teamData){
 
     // create object with key and value in 
 
-    console.log(publicPercentagesArr)
-    console.log(sortedPercentagesArr)
-    console.log(publicDataArray)
-    console.log(TeamDataArray)
+    // console.log(publicPercentagesArr)
+    // console.log(sortedPercentagesArr)
+    // console.log(publicDataArray)
+    // console.log(TeamDataArray)
     
     //console.log(data[0])
 }
 
 function getTrending2(publicData, teamData){
 
-    for(let j = 16; j < 18; j++){
+    for(let j = 16; j < 20; j++){
         if(document.getElementById('team-1-data-container').contains(document.getElementById('team-1-container-' + j))){
             document.getElementById('team-1-container-' +  j).remove()
         }
