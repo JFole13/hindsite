@@ -2,7 +2,7 @@ const e = require('express');
 const res = require('express/lib/response');
 const { jsonp } = require('express/lib/response');
 const mysql = require('mysql')
-let actionjson = require('/Users/jesse/OneDrive/Desktop/projects/hindsite/actionNetworkData.json');
+let actionjson = require('/Users/jesse/OneDrive/Desktop/projects/hindsite/testData.json');
 let espnjson = require('/Users/jesse/OneDrive/Desktop/projects/hindsite/espnData.json') 
 
 // Create connection
@@ -42,57 +42,10 @@ const pacific = ['Canucks', 'Ducks', 'Golden Knights', 'Flames', 'Kings', 'Krake
 const atlantic = ['Bruins', 'Canadiens', 'Lightning', 'Maple Leafs', 'Panthers', 'Red Wings', 'Sabres', 'Senators']
 const metropolitan = ['Blue Jackets', 'Capitals', 'Devils', 'Flyers', 'Hurricanes', 'Islanders', 'Penguins', 'Rangers']
 
-
-let away_ml_record_win = 0
-let away_ml_record_loss = 0 
-let home_ml_record_win = 0 
-let home_ml_record_loss = 0
-let home_170_ml_record_win = 0
-let home_170_ml_record_loss = 0
-let away_170_ml_record_win = 0
-let away_170_ml_record_loss = 0
-let home_200_ml_record_win = 0
-let home_200_ml_record_loss = 0
-let away_200_ml_record_win = 0
-let away_200_ml_record_loss = 0
-let away_300_ml_record_win = 0
-let away_300_ml_record_loss = 0
-let home_300_ml_record_win = 0
-let home_300_ml_record_loss = 0
-let away_over_record = 0
-let away_under_record = 0
-let home_over_record = 0
-let home_under_record = 0
-let away_goals = 0
-let home_goals = 0
-let away_line_record_win = 0
-let away_line_record_loss = 0
-let home_line_record_win = 0
-let home_line_record_loss = 0
-let away_rival_record_win = 0
-let away_rival_record_loss = 0
-let home_rival_record_win = 0
-let home_rival_record_loss = 0
-let away_fave_rival_record_win = 0
-let away_fave_rival_record_loss = 0
-let home_fave_rival_record_loss = 0
-let home_fave_rival_record_win = 0
-let away_fave_record_win = 0
-let away_fave_record_loss = 0
-let home_fave_record_win = 0
-let home_fave_record_loss = 0
-let away_dog_record_win = 0
-let away_dog_record_loss = 0
-let home_dog_record_win = 0
-let home_dog_record_loss = 0
-let team_away_ml_record_win = 0
-let team_away_ml_record_loss = 0
-let team_home_ml_record_win = 0
-let team_home_ml_record_loss = 0
-let team_away_170_ml_record_win = 0
-let team_away_170_ml_record_loss = 0
-let team_home_170_ml_record_win = 0
-let team_home_170_ml_record_loss = 0
+let awayCountWin = 0
+let awayCountLoss = 0
+let homeCountWin = 0
+let homeCountLoss = 0
 
 let awayWinArr = []
 let awayLossArr = []
@@ -144,74 +97,59 @@ let teamAway170WinArr = []
 let teamAway170LossArr = []
 let teamHome170WinArr = []
 let teamHome170LossArr = [] 
+let teamAway200WinArr = []
+let teamAway200LossArr = []
+let teamHome200WinArr = []
+let teamHome200LossArr = []
+let teamAwayOver6Arr = []
+let teamAwayUnder6Arr = []
+let teamHomeOver6Arr = []
+let teamHomeUnder6Arr = []
+let teamAwayLineWinArr = []
+let teamAwayLineLossArr = []
+let teamHomeLineWinArr = []
+let teamHomeLineLossArr = []
+let teamAwayRivalWinArr = []
+let teamAwayRivalLossArr = []
+let teamHomeRivalWinArr = []
+let teamHomeRivalLossArr = []
+let teamAwayFaveWinArr = []
+let teamAwayFaveLossArr = []
+let teamHomeFaveWinArr = []
+let teamHomeFaveLossArr = []
+let teamAwayDogWinArr = []
+let teamAwayDogLossArr = []
+let teamHomeDogWinArr = []
+let teamHomeDogLossArr = []
+
 
 for(let i = 0; i < gameArray.length; i++){
     for(let j = 0; j < actionjson.length; j++){
         if(gameArray[i].away_team == actionjson[j].away_team){
-            away_ml_record_win = 0
-            away_ml_record_loss = 0
-            home_ml_record_win = 0
-            home_ml_record_loss = 0
-            home_170_ml_record_win = 0
-            home_170_ml_record_loss = 0
-            away_170_ml_record_win = 0
-            away_170_ml_record_loss = 0
-            home_200_ml_record_win = 0
-            home_200_ml_record_loss = 0
-            away_200_ml_record_win = 0
-            away_200_ml_record_loss = 0
-            away_300_ml_record_win = 0
-            away_300_ml_record_loss = 0
-            home_300_ml_record_win = 0
-            home_300_ml_record_loss = 0
-            away_over_record = 0
-            away_under_record = 0
-            home_over_record = 0
-            home_under_record = 0
-            away_goals = 0
-            home_goals = 0
-            away_line_record_win = 0
-            away_line_record_loss = 0
-            home_line_record_win = 0
-            home_line_record_loss = 0
-            away_rival_record_win = 0
-            away_rival_record_loss = 0
-            home_rival_record_win = 0
-            home_rival_record_loss = 0
-            away_fave_rival_record_win = 0
-            away_fave_rival_record_loss = 0
-            home_fave_rival_record_win = 0
-            home_fave_rival_record_loss = 0
-            away_fave_record_win = 0
-            away_fave_record_loss = 0
-            home_fave_record_win = 0
-            home_fave_record_loss = 0
-            away_dog_record_win = 0
-            away_dog_record_loss = 0
-            home_dog_record_win = 0
-            home_dog_record_loss = 0
-            team_away_ml_record_win = 0
-            team_away_ml_record_loss = 0
-            team_home_ml_record_win = 0
-            team_home_ml_record_loss = 0
-            team_away_170_ml_record_win = 0
-            team_away_170_ml_record_loss = 0
-            team_home_170_ml_record_win = 0
-            team_home_170_ml_record_loss = 0
+            awayCountWin = 0
+            awayCountLoss = 0
+            homeCountWin = 0
+            homeCountLoss = 0
 
-            updateTeamML(gameArray[i])
-            updateTeam170ML(gameArray[i], actionjson[j])
-            updateTeam200ML(gameArray[i], actionjson[j])
-            updateTeam300ML(gameArray[i], actionjson[j])
-            updateTeamTotal(gameArray[i])
+            updateTeamML(gameArray[i], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateTeam170ML(gameArray[i], actionjson[j], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateTeam200ML(gameArray[i], actionjson[j], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateTeam300ML(gameArray[i], actionjson[j], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateTeamTotal(gameArray[i], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
             // updateTeamGoals(gameArray[i])
-            updateTeamLines(gameArray[i], actionjson[j])
-            updateTeamRivalsML(gameArray[i])
+            updateTeamLines(gameArray[i], actionjson[j], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateTeamRivalsML(gameArray[i], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
             //updateTeamFaveRivals(gameArray[i], actionjson[j])
-            updateTeamFaveML(gameArray[i], actionjson[j])
-            updateTeamDogML(gameArray[i], actionjson[j])
-            updateSelectedTeamML(gameArray[i])
-            updateSelectedTeam170ML(gameArray[i], actionjson[j])
+            updateTeamFaveML(gameArray[i], actionjson[j], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateTeamDogML(gameArray[i], actionjson[j], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateSelectedTeamML(gameArray[i], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateSelectedTeam170ML(gameArray[i], actionjson[j], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateSelectedTeam200ML(gameArray[i], actionjson[j], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateSelectedTeamTotal(gameArray[i], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateSelectedTeamLines(gameArray[i], actionjson[j], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateSelectedTeamRival(gameArray[i], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateSelectedTeamFave(gameArray[i], actionjson[j], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
+            updateSelectedTeamDog(gameArray[i], actionjson[j], awayCountWin, awayCountLoss, homeCountWin, homeCountLoss)
         }
     }
 }
@@ -219,73 +157,73 @@ for(let i = 0; i < gameArray.length; i++){
 sendHomeAwayData()
 
 
-function updateTeamML(espnObject){
+function updateTeamML(espnObject, awayWin, awayLoss, homeWin, homeLoss){
     if(espnObject.away_win){
-        away_ml_record_win++
-        home_ml_record_loss++
+        awayWin++
+        homeLoss++
     }else{
-        away_ml_record_loss++
-        home_ml_record_win++
+        awayLoss++
+        homeWin++
     }
 
-    awayWinArr.push(away_ml_record_win)
-    awayLossArr.push(away_ml_record_loss)
-    homeWinArr.push(home_ml_record_win)
-    homeLossArr.push(home_ml_record_loss)
+    awayWinArr.push(awayWin)
+    awayLossArr.push(awayLoss)
+    homeWinArr.push(homeWin)
+    homeLossArr.push(homeLoss)
 }
 
-function updateTeam170ML(espnObject, actionObject){
+function updateTeam170ML(espnObject, actionObject, awayWin, awayLoss, homeWin, homeLoss){
     if(actionObject.away_opening_odds.includes('-') && Math.abs(parseInt(actionObject.away_opening_odds)) >= 170 && Math.abs(parseInt(actionObject.away_opening_odds)) < 200){
-        espnObject.away_win ? away_170_ml_record_win++ : away_170_ml_record_loss++
+        espnObject.away_win ? awayWin++ : awayLoss++
     }else if(actionObject.home_opening_odds.includes('-') && Math.abs(parseInt(actionObject.home_opening_odds)) >= 170 && Math.abs(parseInt(actionObject.home_opening_odds)) < 200){
-        espnObject.home_win ? home_170_ml_record_win++ : home_170_ml_record_loss++
+        espnObject.home_win ? homeWin : home_170_ml_record_loss++
     }
 
-    away170WinArr.push(away_170_ml_record_win)
-    away170LossArr.push(away_170_ml_record_loss)
-    home170WinArr.push(home_170_ml_record_win)
-    home170LossArr.push(home_170_ml_record_loss)    
+    away170WinArr.push(awayWin)
+    away170LossArr.push(awayLoss)
+    home170WinArr.push(homeWin)
+    home170LossArr.push(homeLoss)    
 }
 
-function updateTeam200ML(espnObject, actionObject){
+function updateTeam200ML(espnObject, actionObject, awayWin, awayLoss, homeWin, homeLoss){
     if(actionObject.away_opening_odds.includes('-') && Math.abs(parseInt(actionObject.away_opening_odds)) >= 200 && Math.abs(parseInt(actionObject.away_opening_odds)) < 300){
-        espnObject.away_win ? away_200_ml_record_win++ : away_200_ml_record_loss++
+        espnObject.away_win ? awayWin++ : awayLoss++
     }else if(actionObject.home_opening_odds.includes('-') && Math.abs(parseInt(actionObject.home_opening_odds)) >= 200 && Math.abs(parseInt(actionObject.home_opening_odds)) < 300){
-        espnObject.home_win ? home_200_ml_record_win++ : home_200_ml_record_loss++
+        espnObject.home_win ? homeWin++ : homeLoss++
     }
 
-    away200WinArr.push(away_200_ml_record_win)
-    away200LossArr.push(away_200_ml_record_loss)
-    home200WinArr.push(home_200_ml_record_win)
-    home200LossArr.push(home_200_ml_record_loss) 
+    away200WinArr.push(awayWin)
+    away200LossArr.push(awayLoss)
+    home200WinArr.push(homeWin)
+    home200LossArr.push(homeLoss) 
 }
 
-function updateTeam300ML(espnObject, actionObject){
+function updateTeam300ML(espnObject, actionObject, awayWin, awayLoss, homeWin, homeLoss){
     if(actionObject.away_opening_odds.includes('-') && Math.abs(parseInt(actionObject.away_opening_odds)) >= 300){
-        espnObject.away_win ? away_300_ml_record_win++ : away_300_ml_record_loss++
+        espnObject.away_win ? awayWin++ : awayLoss++
     }else if(actionObject.home_opening_odds.includes('-') && Math.abs(parseInt(actionObject.home_opening_odds)) >= 300){
-        espnObject.home_win ? home_300_ml_record_win++ : home_300_ml_record_loss++
+        espnObject.home_win ? homeWin++ : homeLoss++
     }
 
-    away300WinArr.push(away_300_ml_record_win)
-    away300LossArr.push(away_300_ml_record_loss)
-    home300WinArr.push(home_300_ml_record_win)
-    home300LossArr.push(home_300_ml_record_loss) 
+    away300WinArr.push(awayWin)
+    away300LossArr.push(awayLoss)
+    home300WinArr.push(homeWin)
+    home300LossArr.push(homeLoss) 
 }
 
-function updateTeamTotal(espnObject){
+function updateTeamTotal(espnObject, awayWin, awayLoss, homeWin, homeLoss){
     if(parseInt(espnObject.away_score) + parseInt(espnObject.home_score) > 6){
-        away_over_record++
-        home_over_record++
+        awayWin++
+        homeWin++
     }else{
-        away_under_record++
-        home_under_record++
+        awayLoss++
+        homeLoss++
     }
 
-    awayOver6Arr.push(away_over_record)
-    awayUnder6Arr.push(away_under_record)
-    homeOver6Arr.push(home_over_record)
-    homeUnder6Arr.push(home_under_record)
+    awayOver6Arr.push(awayWin)
+    awayUnder6Arr.push(awayLoss)
+    homeOver6Arr.push(homeWin)
+    homeUnder6Arr.push(homeLoss)
 
 }
 
@@ -297,146 +235,286 @@ function updateTeamTotal(espnObject){
 //     homeGoalsArr.push(home_goals)
 // }
 
-function updateTeamLines(espnObject, actionObject){
+function updateTeamLines(espnObject, actionObject, awayWin, awayLoss, homeWin, homeLoss){
     if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
         if(actionObject.away_opening_odds != actionObject.home_opening_odds){
             if(parseInt(actionObject.away_opening_odds) < parseInt(actionObject.home_opening_odds)){
-                (parseInt(espnObject.away_score) - parseInt(espnObject.home_score) > 1) ? away_line_record_win++ : away_line_record_loss++
+                (parseInt(espnObject.away_score) - parseInt(espnObject.home_score) > 1) ? awayWin++ : awayLoss++
             }else{
-            (parseInt(espnObject.home_score) - parseInt(espnObject.away_score) > 1) ? home_line_record_win++ : home_line_record_loss++
+            (parseInt(espnObject.home_score) - parseInt(espnObject.away_score) > 1) ? homeWin++ : homeLoss++
 
             }
         }
     }else{
         if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('+')){
-            (parseInt(espnObject.away_score) - parseInt(espnObject.home_score) > 1) ? away_line_record_win++ : away_line_record_loss++  
+            (parseInt(espnObject.away_score) - parseInt(espnObject.home_score) > 1) ? awayWin++ : awayLoss++  
         }else if(actionObject.home_opening_odds.includes('-') && actionObject.away_opening_odds.includes('+')){
-            (parseInt(espnObject.home_score) - parseInt(espnObject.away_score) > 1) ? home_line_record_win++ : home_line_record_loss++
+            (parseInt(espnObject.home_score) - parseInt(espnObject.away_score) > 1) ? homeWin++ : homeLoss++
         }
     }
 
-    awayLineWinArr.push(away_line_record_win)
-    awayLineLossArr.push(away_line_record_loss)
-    homeLineWinArr.push(home_line_record_win)
-    homeLineLossArr.push(home_line_record_loss)
+    awayLineWinArr.push(awayWin)
+    awayLineLossArr.push(awayLoss)
+    homeLineWinArr.push(homeWin)
+    homeLineLossArr.push(homeLoss)
 
 }
 
-function updateTeamRivalsML(espnObject){
+function updateTeamRivalsML(espnObject, awayWin, awayLoss, homeWin, homeLoss){
     if(central.includes(espnObject.away_team) && central.includes(espnObject.home_team)){
         if(espnObject.away_win){
-            away_rival_record_win++
-            home_rival_record_loss++
+            awayWin++
+            homeLoss++
         }else{
-            away_rival_record_loss++
-            home_rival_record_win++
+            awayLoss++
+            homeWin++
         }
     }else if(pacific.includes(espnObject.away_team) && pacific.includes(espnObject.home_team)){
         if(espnObject.away_win){
-            away_rival_record_win++
-            home_rival_record_loss++
+            awayWin++
+            homeLoss++
         }else{
-            away_rival_record_loss++
-            home_rival_record_win++
+            awayLoss++
+            homeWin++
         }
     }else if(atlantic.includes(espnObject.away_team) && atlantic.includes(espnObject.home_team)){
         if(espnObject.away_win){
-            away_rival_record_win++
-            home_rival_record_loss++
+            awayWin++
+            homeLoss++
         }else{
-            away_rival_record_loss++
-            home_rival_record_win++
+            awayLoss++
+            homeWin++
         }
     }else if(metropolitan.includes(espnObject.away_team) && metropolitan.includes(espnObject.home_team)){
         if(espnObject.away_win){
-            away_rival_record_win++
-            home_rival_record_loss++
+            awayWin++
+            homeLoss++
         }else{
-            away_rival_record_loss++
-            home_rival_record_win++
+            awayLoss++
+            homeWin++
         }
     }
 
-    awayRivalWinArr.push(away_rival_record_win)
-    awayRivalLossArr.push(away_rival_record_loss)
-    homeRivalWinArr.push(home_rival_record_win)
-    homeRivalLossArr.push(home_rival_record_loss)
+    awayRivalWinArr.push(awayWin)
+    awayRivalLossArr.push(awayLoss)
+    homeRivalWinArr.push(homeWin)
+    homeRivalLossArr.push(homeLoss)
 
 }
 
-function updateTeamFaveML(espnObject, actionObject){
+function updateTeamFaveML(espnObject, actionObject, awayWin, awayLoss, homeWin, homeLoss){
     if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
        if(actionObject.away_opening_odds != actionObject.home_opening_odds){
            if(parseInt(actionObject.away_opening_odds) < parseInt(actionObject.home_opening_odds)){
-               espnObject.away_win ? away_fave_record_win++ : away_fave_record_loss++
+               espnObject.away_win ? awayWin++ : awayLoss++
            }else{
-               espnObject.home_win ? home_fave_record_win++ : home_fave_record_loss++
+               espnObject.home_win ? homeWin++ : homeLoss++
            }
        } 
     }else{
         if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('+')){
-            espnObject.away_win ? away_fave_record_win++ : away_fave_record_loss++
+            espnObject.away_win ? awayWin++ : awayLoss++
         }else if(actionObject.away_opening_odds.includes('+') && actionObject.home_opening_odds.includes('-')){
-            espnObject.home_win ? home_fave_record_win++ : home_fave_record_loss++
+            espnObject.home_win ? homeWin++ : homeLoss++
         }
     }
 
-    awayFaveWinArr.push(away_fave_record_win)
-    awayFaveLossArr.push(away_fave_record_loss)
-    homeFaveWinArr.push(home_fave_record_win)
-    homeFaveLossArr.push(home_fave_record_loss)
+    awayFaveWinArr.push(awayWin)
+    awayFaveLossArr.push(awayLoss)
+    homeFaveWinArr.push(homeWin)
+    homeFaveLossArr.push(homeLoss)
 
 }
 
-function updateTeamDogML(espnObject, actionObject){
+function updateTeamDogML(espnObject, actionObject, awayWin, awayLoss, homeWin, homeLoss){
     if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
         if(actionObject.away_opening_odds != actionObject.home_opening_odds){
             if(parseInt(actionObject.away_opening_odds) > parseInt(actionObject.home_opening_odds)){
-                espnObject.away_win ? away_dog_record_win++ : away_dog_record_loss++
+                espnObject.away_win ? awayWin++ : awayLoss++
             }else{
-                espnObject.home_win ? home_dog_record_win++ : home_dog_record_loss++
+                espnObject.home_win ? homeWin++ : homeLoss++
             }
         }
     }else{
         if(actionObject.away_opening_odds.includes('+') && actionObject.home_opening_odds.includes('-')){
-            espnObject.away_win ? away_dog_record_win++ : away_dog_record_loss++
+            espnObject.away_win ? awayWin++ : awayLoss++
         }else if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('+')){
-            espnObject.home_win ? home_dog_record_win++ : home_dog_record_loss++
+            espnObject.home_win ? homeWin++ : homeLoss++
         }
     }
 
-    awayDogWinArr.push(away_dog_record_win)
-    awayDogLossArr.push(away_dog_record_loss)
-    homeDogWinArr.push(home_dog_record_win)
-    homeDogLossArr.push(home_dog_record_loss)
+    awayDogWinArr.push(awayWin)
+    awayDogLossArr.push(awayLoss)
+    homeDogWinArr.push(homeWin)
+    homeDogLossArr.push(homeLoss)
 }
 
-function updateSelectedTeamML(espnObject){
+function updateSelectedTeamML(espnObject, awayWin, awayLoss, homeWin, homeLoss){
     if(espnObject.away_win){
-        team_away_ml_record_win++
-        team_home_ml_record_loss++
+        awayWin++
+        homeLoss++
     }else{
-        team_away_ml_record_loss++
-        team_home_ml_record_win++
+        awayLoss++
+        homeWin++
     }
 
-    teamAwayWinArr.push(team_away_ml_record_win)
-    teamAwayLossArr.push(team_away_ml_record_loss)
-    teamHomeWinArr.push(team_home_ml_record_win)
-    teamHomeLossArr.push(team_home_ml_record_loss)
+    teamAwayWinArr.push(awayWin)
+    teamAwayLossArr.push(awayLoss)
+    teamHomeWinArr.push(homeWin)
+    teamHomeLossArr.push(homeLoss)
 }
 
-function updateSelectedTeam170ML(espnObject, actionObject){
+function updateSelectedTeam170ML(espnObject, actionObject, awayWin, awayLoss, homeWin, homeLoss){
     if(actionObject.away_opening_odds.includes('-') && Math.abs(parseInt(actionObject.away_opening_odds)) >= 170 && Math.abs(parseInt(actionObject.away_opening_odds)) < 200){
-        espnObject.away_win ? team_away_170_ml_record_win++ : team_away_170_ml_record_loss++
+        espnObject.away_win ? awayWin++ : awayLoss++
     }else if(actionObject.home_opening_odds.includes('-') && Math.abs(parseInt(actionObject.home_opening_odds)) >= 170 && Math.abs(parseInt(actionObject.home_opening_odds)) < 200){
-        espnObject.home_win ? team_home_170_ml_record_win++ : team_home_170_ml_record_loss++
+        espnObject.home_win ? homeWin++ : homeLoss++
     }
 
-    teamAway170WinArr.push(team_away_170_ml_record_win)
-    teamAway170LossArr.push(team_away_170_ml_record_loss)
-    teamHome170WinArr.push(team_home_170_ml_record_win)
-    teamHome170LossArr.push(team_home_170_ml_record_loss)  
+    teamAway170WinArr.push(awayWin)
+    teamAway170LossArr.push(awayLoss)
+    teamHome170WinArr.push(homeWin)
+    teamHome170LossArr.push(homeLoss)  
+}
+
+function updateSelectedTeam200ML(espnObject, actionObject, awayWin, awayLoss, homeWin, homeLoss){
+    if(actionObject.away_opening_odds.includes('-') && Math.abs(parseInt(actionObject.away_opening_odds)) >= 200 && Math.abs(parseInt(actionObject.away_opening_odds)) < 300){
+        espnObject.away_win ? awayWin++ : awayLoss++
+    }else if(actionObject.home_opening_odds.includes('-') && Math.abs(parseInt(actionObject.home_opening_odds)) >= 200 && Math.abs(parseInt(actionObject.home_opening_odds)) < 170){
+        espnObject.home_win ? homeWin++ : homeLoss++
+    }
+
+    teamAway200WinArr.push(awayWin)
+    teamAway200LossArr.push(awayLoss)
+    teamHome200WinArr.push(homeWin)
+    teamHome200LossArr.push(homeLoss)  
+}
+
+function updateSelectedTeamTotal(espnObject, awayWin, awayLoss, homeWin, homeLoss){
+    if(parseInt(espnObject.away_score) + parseInt(espnObject.home_score) > 6){
+        awayWin++
+        homeWin++
+    }else{
+        awayLoss++
+        homeLoss++
+    }
+
+    teamAwayOver6Arr.push(awayWin)
+    teamAwayUnder6Arr.push(awayLoss)
+    teamHomeOver6Arr.push(homeWin)
+    teamHomeUnder6Arr.push(homeLoss)
+}
+
+function updateSelectedTeamLines(espnObject, actionObject, awayWin, awayLoss, homeWin, homeLoss){
+    if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
+        if(actionObject.away_opening_odds != actionObject.home_opening_odds){
+            if(parseInt(actionObject.away_opening_odds) < parseInt(actionObject.home_opening_odds)){
+                (parseInt(espnObject.away_score) - parseInt(espnObject.home_score) > 1) ? awayWin++ : awayLoss++
+            }else{
+            (parseInt(espnObject.home_score) - parseInt(espnObject.away_score) > 1) ? homeWin++ : homeLoss++
+
+            }
+        }
+    }else{
+        if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('+')){
+            (parseInt(espnObject.away_score) - parseInt(espnObject.home_score) > 1) ? awayWin++ : awayLoss++  
+        }else if(actionObject.home_opening_odds.includes('-') && actionObject.away_opening_odds.includes('+')){
+            (parseInt(espnObject.home_score) - parseInt(espnObject.away_score) > 1) ? homeWin++ : homeLoss++
+        }
+    }
+
+    teamAwayLineWinArr.push(awayWin)
+    teamAwayLineLossArr.push(awayLoss)
+    teamHomeLineWinArr.push(homeWin)
+    teamHomeLineLossArr.push(homeLoss)
+}
+
+function updateSelectedTeamRival(espnObject, awayWin, awayLoss, homeWin, homeLoss){
+    if(central.includes(espnObject.away_team) && central.includes(espnObject.home_team)){
+        if(espnObject.away_win){
+            awayWin++
+            homeLoss++
+        }else{
+            awayLoss++
+            homeWin++
+        }
+    }else if(pacific.includes(espnObject.away_team) && pacific.includes(espnObject.home_team)){
+        if(espnObject.away_win){
+            awayWin++
+            homeLoss++
+        }else{
+            awayLoss++
+            homeWin++
+        }
+    }else if(atlantic.includes(espnObject.away_team) && atlantic.includes(espnObject.home_team)){
+        if(espnObject.away_win){
+            awayWin++
+            homeLoss++
+        }else{
+            awayLoss++
+            homeWin++
+        }
+    }else if(metropolitan.includes(espnObject.away_team) && metropolitan.includes(espnObject.home_team)){
+        if(espnObject.away_win){
+            awayWin++
+            homeLoss++
+        }else{
+            awayLoss++
+            homeWin++
+        }
+    }
+
+    teamAwayRivalWinArr.push(awayWin)
+    teamAwayRivalLossArr.push(awayLoss)
+    teamHomeRivalWinArr.push(homeWin)
+    teamHomeRivalLossArr.push(homeLoss)
+
+}
+
+function updateSelectedTeamFave(espnObject, actionObject, awayWin, awayLoss, homeWin, homeLoss){
+    if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
+        if(actionObject.away_opening_odds != actionObject.home_opening_odds){
+            if(parseInt(actionObject.away_opening_odds) < parseInt(actionObject.home_opening_odds)){
+                espnObject.away_win ? awayWin++ : awayLoss++
+            }else{
+                espnObject.home_win ? homeWin++ : homeLoss++
+            }
+        } 
+     }else{
+         if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('+')){
+             espnObject.away_win ? awayWin++ : awayLoss++
+         }else if(actionObject.away_opening_odds.includes('+') && actionObject.home_opening_odds.includes('-')){
+             espnObject.home_win ? homeWin++ : homeLoss++
+         }
+     }
+ 
+     teamAwayFaveWinArr.push(awayWin)
+     teamAwayFaveLossArr.push(awayLoss)
+     teamHomeFaveWinArr.push(homeWin)
+     teamHomeFaveLossArr.push(homeLoss)
+}
+
+function updateSelectedTeamDog(espnObject, actionObject, awayWin, awayLoss, homeWin, homeLoss){
+    if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('-')){
+        if(actionObject.away_opening_odds != actionObject.home_opening_odds){
+            if(parseInt(actionObject.away_opening_odds) > parseInt(actionObject.home_opening_odds)){
+                espnObject.away_win ? awayWin++ : awayLoss++
+            }else{
+                espnObject.home_win ? homeWin++ : homeLoss++
+            }
+        }
+    }else{
+        if(actionObject.away_opening_odds.includes('+') && actionObject.home_opening_odds.includes('-')){
+            espnObject.away_win ? awayWin++ : awayLoss++
+        }else if(actionObject.away_opening_odds.includes('-') && actionObject.home_opening_odds.includes('+')){
+            espnObject.home_win ? homeWin++ : homeLoss++
+        }
+    }
+
+    teamAwayDogWinArr.push(awayWin)
+    teamAwayDogLossArr.push(awayLoss)
+    teamHomeDogWinArr.push(homeWin)
+    teamHomeDogLossArr.push(homeLoss)
 }
 
 
@@ -450,12 +528,61 @@ function updateSelectedTeam170ML(espnObject, actionObject){
 // }
 
 function sendHomeAwayData(){
-    console.log(teamAway170WinArr)
-    console.log(teamAway170LossArr)
-    console.log(teamHome170WinArr)
-    console.log(teamHome170LossArr)
+    console.log(away170WinArr)
+    console.log(away170LossArr)
+    console.log(home170WinArr)
+    console.log(home170LossArr)
 
+    for(let i = 0; i < gameArray.length; i++){
 
+        let sql = `SELECT * FROM team_fave_record where team_name = '${gameArray[i].away_team}'`
+
+        let tempTeam = gameArray[i].home_team.toLowerCase().replace(' ', '_')
+
+        let winDog = `home_dog_ml_${tempTeam}_record_win`
+        let lossDog = `home_dog_ml_${tempTeam}_record_loss`
+
+        db.query(sql, function (err, result) {  
+            if (err) throw err;  
+            
+    
+            sql = `UPDATE team_fave_record SET away_dog_ml_${tempTeam}_record_win = ${teamAwayDogWinArr[i] + result[0][winDog]},
+                                                away_dog_ml_${tempTeam}_record_loss = ${teamAwayDogLossArr[i] + result[0][lossDog]}
+           
+                                                WHERE team_name = '${gameArray[i].away_team}'`
+    
+            db.query(sql, function (err, result) {  
+                if (err) throw err; 
+                
+            })   
+        }) 
+
+    }
+
+    for(let i = 0; i < gameArray.length; i++){
+
+        let sql = `SELECT * FROM team_fave_record where team_name = '${gameArray[i].home_team}'`
+
+        let tempTeam = gameArray[i].away_team.toLowerCase().replace(' ', '_')
+
+        let winDog = `away_dog_ml_${tempTeam}_record_win`
+        let lossDog = `away_dog_ml_${tempTeam}_record_loss`
+
+        db.query(sql, function (err, result) {  
+            if (err) throw err;  
+            
+    
+            sql = `UPDATE team_fave_record SET home_dog_ml_${tempTeam}_record_win = ${teamHomeDogWinArr[i] + result[0][winDog]},
+                                                home_dog_ml_${tempTeam}_record_loss = ${teamHomeDogLossArr[i] + result[0][lossDog]}
+           
+                                                WHERE team_name = '${gameArray[i].home_team}'`
+            db.query(sql, function (err, result) {  
+                if (err) throw err; 
+                
+            })   
+        }) 
+
+    }
 
     for(let i = 0; i < gameArray.length; i++){
 
@@ -468,6 +595,20 @@ function sendHomeAwayData(){
         let opposingTeamLoss = `home_ml_${tempTeam}_record_loss`
         let win170 = `home_170_ml_${tempTeam}_record_win`
         let loss170 = `home_170_ml_${tempTeam}_record_loss`
+        let win200 = `home_200_ml_${tempTeam}_record_win`
+        let loss200 = `home_200_ml_${tempTeam}_record_loss`
+        let winOver = `home_over_${tempTeam}_record`
+        let lossUnder = `home_under_${tempTeam}_record`
+        let winLine = `home_line_${tempTeam}_record_win`
+        let lossLine = `home_line_${tempTeam}_record_loss`
+        let winRival = `home_rivals_ml_${tempTeam}_record_win`
+        let lossRival = `home_rivals_ml_${tempTeam}_record_loss`
+        let winFave = `home_fave_ml_${tempTeam}_record_win`
+        let lossFave = `home_fave_ml_${tempTeam}_record_loss`
+
+
+
+
 
 
 
@@ -496,7 +637,18 @@ function sendHomeAwayData(){
                                                away_ml_${tempTeam}_record_win = ${teamAwayWinArr[i] + result[0][opposingTeamWin]},
                                                away_ml_${tempTeam}_record_loss = ${teamAwayLossArr[i] + result[0][opposingTeamLoss]},
                                                away_170_ml_${tempTeam}_record_win = ${teamAway170WinArr[i] + result[0][win170]},
-                                               away_170_ml_${tempTeam}_record_loss = ${teamAway170LossArr[i] + result[0][loss170]} 
+                                               away_170_ml_${tempTeam}_record_loss = ${teamAway170LossArr[i] + result[0][loss170]},
+                                               away_200_ml_${tempTeam}_record_win = ${teamAway200WinArr[i] + result[0][win200]},
+                                               away_200_ml_${tempTeam}_record_loss = ${teamAway200LossArr[i] + result[0][loss200]},
+                                               away_over_${tempTeam}_record = ${teamAwayOver6Arr[i] + result[0][winOver]},
+                                               away_under_${tempTeam}_record = ${teamAwayUnder6Arr[i] + result[0][lossUnder]},
+                                               away_line_${tempTeam}_record_win = ${teamAwayLineWinArr[i] + result[0][winLine]},
+                                               away_line_${tempTeam}_record_loss = ${teamAwayLineLossArr[i] + result[0][lossLine]},
+                                               away_rivals_ml_${tempTeam}_record_win = ${teamAwayRivalWinArr[i] + result[0][winRival]},
+                                               away_rivals_ml_${tempTeam}_record_loss = ${teamAwayRivalLossArr[i] + result[0][lossRival]},
+                                               away_fave_ml_${tempTeam}_record_win = ${teamAwayFaveWinArr[i] + result[0][winFave]},
+                                               away_fave_ml_${tempTeam}_record_loss = ${teamAwayFaveLossArr[i] + result[0][lossFave]}
+                                               
                                                
                             WHERE team_name = '${gameArray[i].away_team}'`
 
@@ -524,6 +676,16 @@ function sendHomeAwayData(){
         let opposingTeamLoss = `away_ml_${tempTeam}_record_loss`
         let win170 = `away_170_ml_${tempTeam}_record_win`
         let loss170 = `away_170_ml_${tempTeam}_record_loss`
+        let win200 = `away_200_ml_${tempTeam}_record_win`
+        let loss200 = `away_200_ml_${tempTeam}_record_loss`
+        let winOver = `away_over_${tempTeam}_record`
+        let lossUnder = `away_under_${tempTeam}_record`
+        let winLine = `away_line_${tempTeam}_record_win`
+        let lossLine = `away_line_${tempTeam}_record_loss`
+        let winRival = `away_rivals_ml_${tempTeam}_record_win`
+        let lossRival = `away_rivals_ml_${tempTeam}_record_loss`
+        let winFave = `away_fave_ml_${tempTeam}_record_win`
+        let lossFave = `away_fave_ml_${tempTeam}_record_loss`
 
 
         db.query(sql, function (err, result) {  
@@ -548,9 +710,19 @@ function sendHomeAwayData(){
                                                home_dog_record_loss = ${homeDogLossArr[i] + result[0].home_dog_record_loss},
                                                home_ml_${tempTeam}_record_win = ${teamHomeWinArr[i] + result[0][opposingTeamWin]},
                                                home_ml_${tempTeam}_record_loss = ${teamHomeLossArr[i] + result[0][opposingTeamLoss]},
-                                               home_170_ml_${tempTeam}_record_win = ${teamAway170WinArr[i] + result[0][win170]},
-                                               home_170_ml_${tempTeam}_record_loss = ${teamAway170LossArr[i] + result[0][loss170]}
-                                            
+                                               home_170_ml_${tempTeam}_record_win = ${teamHome170WinArr[i] + result[0][win170]},
+                                               home_170_ml_${tempTeam}_record_loss = ${teamHome170LossArr[i] + result[0][loss170]},
+                                               home_200_ml_${tempTeam}_record_win = ${teamHome200WinArr[i] + result[0][win200]},
+                                               home_200_ml_${tempTeam}_record_loss = ${teamHome200LossArr[i] + result[0][loss200]},
+                                               home_over_${tempTeam}_record = ${teamHomeOver6Arr[i] + result[0][winOver]},
+                                               home_under_${tempTeam}_record = ${teamHomeUnder6Arr[i] + result[0][lossUnder]},
+                                               home_line_${tempTeam}_record_win = ${teamHomeLineWinArr[i] + result[0][winLine]},
+                                               home_line_${tempTeam}_record_loss = ${teamHomeLineLossArr[i] + result[0][lossLine]},
+                                               home_rivals_ml_${tempTeam}_record_win = ${teamHomeRivalWinArr[i] + result[0][winRival]},
+                                               home_rivals_ml_${tempTeam}_record_loss = ${teamHomeRivalLossArr[i] + result[0][lossRival]},
+                                               home_fave_ml_${tempTeam}_record_win = ${teamHomeRivalWinArr[i] + result[0][winFave]},
+                                               home_fave_ml_${tempTeam}_record_loss = ${teamHomeRivalLossArr[i] + result[0][lossFave]}
+                                        
                 
                             WHERE team_name = '${gameArray[i].home_team}'`
             

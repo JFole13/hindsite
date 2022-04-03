@@ -32,6 +32,8 @@ const PublicColor = '44,40,44,0'
 
 const teams = document.querySelectorAll('select')
 
+const iterations = 30
+
 for(let i = 0; i < teams.length; i++){
     teams[i].addEventListener('change', getTeamInfo)
 }
@@ -238,7 +240,7 @@ function generateDivs(data){
 
     let containerCount
     if(teamName != 'trending' && teamName != 'public'){
-        containerCount = 23
+        containerCount = iterations + 3
     }else{
         containerCount = 19
     }
@@ -249,7 +251,7 @@ function generateDivs(data){
         div.classList.add('data')
         div.id = 'team-1-container-' + idCount
 
-        if(count % 3 == 0){
+        if(i % 3 == 2){
             div.style.borderRight = '1px solid #3C3D4C'
         }
 
@@ -268,20 +270,47 @@ function generateDivs(data){
         }
 
         p = document.createElement('p')
-            if(i > 18){
+
+        if(i > 18){
                 //split, to lower case it
                 let words = dataLables[count - 1].split(' ')
-                let word1 = words[0].toLowerCase()
-                let word2 = words[1].toLowerCase()
 
+                let label = ''
+                for(let x = 0; x < words.length; x++){
+    
+                    label += words[x].toLowerCase() + '_'
+                    label = label.replace('-', '')
+                    label = label.replace('>', '')
+                    
+                }
+    
+    
+                let request1, request2
+                if(label == 'home_over_6_'){
+                    request1 = `home_over_${teamName}_record`
+                    request2 = `home_under_${teamName}_record`
+                }else if(label == 'away_over_6_'){
+                    request1 = `away_over_${teamName}_record`
+                    request2 = `away_under_${teamName}_record`
+                }else if(label == 'home_puck_line_'){
+                    request1 = `home_line_${teamName}_record_win`
+                    request2 = `home_line_${teamName}_record_loss`
+                }else if(label == 'away_puck_line_'){
+                    request1 = `away_line_${teamName}_record_win`
+                    request2 = `away_line_${teamName}_record_loss`
+                }else{
+                    request1 = `${label}${teamName}_record_win`
+                    request2 = `${label}${teamName}_record_loss`
+                }
 
-                let request1 = `${word1}_${word2}_${teamName}_record_win`
-                let request2 = `${word1}_${word2}_${teamName}_record_loss`
+                console.log(request1)
+                console.log(request2)
 
                 p.innerHTML = `${data[0][request1]} - ${data[0][request2]}`
             }else{
                 p.innerHTML = `${dataArray[2 * i - 3]} - ${dataArray[2 * i - 2]}`
             }
+        
         
         div.appendChild(h3)
         div.appendChild(p)
@@ -314,14 +343,14 @@ function generateDivs(data){
             }).then(function(response){
                 console.log(response)
 
-                for(let j = 16; j < 20; j++){
+                for(let j = 16; j < iterations; j++){
                     if(document.getElementById('team-2-data-container').contains(document.getElementById('team-2-container-' + j))){
                         document.getElementById('team-2-container-' +  j).remove()
                     }
                 }
 
                 let anotherCount = 0
-                for(let i = 16; i < 20; i++){
+                for(let i = 16; i < iterations; i++){
 
                     
 
@@ -346,7 +375,6 @@ function generateDivs(data){
                     div.appendChild(document.createElement('p'))
 
                     let teamNameforOpposingHeaders = document.getElementById('teams-1').value 
-                    console.log(teamNameforOpposingHeaders)
                     
                     if(teamNameforOpposingHeaders == 'red_wings' || teamNameforOpposingHeaders == 'blue_jackets' || 
                     teamNameforOpposingHeaders == 'golden_knights' || teamNameforOpposingHeaders == 'maple_leafs'){
@@ -356,8 +384,23 @@ function generateDivs(data){
                         div.firstChild.innerHTML = dataLables[anotherCount] + ` (${teamNameforOpposingHeaders.charAt(0).toUpperCase() + teamNameforOpposingHeaders.slice(1)})`
                     }
                         
-                    let request1 = `${label}${teamNameforOpposingHeaders}_record_win`
-                    let request2 = `${label}${teamNameforOpposingHeaders}_record_loss`
+                    let request1, request2
+                    if(label == 'home_over_6_'){
+                        request1 = `home_over_${teamNameforOpposingHeaders}_record`
+                        request2 = `home_under_${teamNameforOpposingHeaders}_record`
+                    }else if(label == 'away_over_6_'){
+                        request1 = `away_over_${teamNameforOpposingHeaders}_record`
+                        request2 = `away_under_${teamNameforOpposingHeaders}_record`
+                    }else if(label == 'home_puck_line_'){
+                        request1 = `home_line_${teamNameforOpposingHeaders}_record_win`
+                        request2 = `home_line_${teamNameforOpposingHeaders}_record_loss`
+                    }else if(label == 'away_puck_line_'){
+                        request1 = `away_line_${teamNameforOpposingHeaders}_record_win`
+                        request2 = `away_line_${teamNameforOpposingHeaders}_record_loss`
+                    }else{
+                        request1 = `${label}${teamNameforOpposingHeaders}_record_win`
+                        request2 = `${label}${teamNameforOpposingHeaders}_record_loss`
+                    }
                 
                     div.lastChild.innerHTML = `${response[0][request1]} - ${response[0][request2]}`
 
@@ -403,7 +446,7 @@ function generate2Divs(data){
     // count is for div naming
     let idCount = 0
     let count = 1
-    for(i; i < 23; i++){
+    for(i; i < iterations + 3; i++){
         div = document.createElement('div')
         div.classList.add('data')
         div.id = 'team-2-container-' + idCount
@@ -427,12 +470,36 @@ function generate2Divs(data){
         if(i > 18){
             //split, to lower case it
             let words = dataLables[count - 1].split(' ')
-            let word1 = words[0].toLowerCase()
-            let word2 = words[1].toLowerCase()
 
+            let label = ''
+            for(let x = 0; x < words.length; x++){
 
-            let request1 = `${word1}_${word2}_${teamName}_record_win`
-            let request2 = `${word1}_${word2}_${teamName}_record_loss`
+                label += words[x].toLowerCase() + '_'
+                label = label.replace('-', '')
+                label = label.replace('>', '')
+                
+            }
+
+            let request1, request2
+            if(label == 'home_over_6_'){
+                request1 = `home_over_${teamName}_record`
+                request2 = `home_under_${teamName}_record`
+            }else if(label == 'away_over_6_'){
+                request1 = `away_over_${teamName}_record`
+                request2 = `away_under_${teamName}_record`
+            }else if(label == 'home_puck_line_'){
+                request1 = `home_line_${teamName}_record_win`
+                request2 = `home_line_${teamName}_record_loss`
+            }else if(label == 'away_puck_line_'){
+                request1 = `away_line_${teamName}_record_win`
+                request2 = `away_line_${teamName}_record_loss`
+            }else{
+                request1 = `${label}${teamName}_record_win`
+                request2 = `${label}${teamName}_record_loss`
+            }
+
+            console.log(request1)
+            console.log(request2)
 
             p.innerHTML = `${data[0][request1]} - ${data[0][request2]}`
         }else{
@@ -466,14 +533,14 @@ function generate2Divs(data){
             return response.json()
         }).then(function(response){
 
-            for(let j = 16; j < 20; j++){
+            for(let j = 16; j < iterations; j++){
                 if(document.getElementById('team-1-data-container').contains(document.getElementById('team-1-container-' + j))){
                  document.getElementById('team-1-container-' + j).remove()
                 }
             }
 
             let anotherCount = 0
-            for(let i = 16; i < 20; i++){
+            for(let i = 16; i < iterations; i++){
 
 
                 let words = dataLables[anotherCount].split(' ')
@@ -512,8 +579,26 @@ function generate2Divs(data){
                 }
                 
                 
-                let request1 = `${label}${teamNameforOpposingHeaders}_record_win`
-                let request2 = `${label}${teamNameforOpposingHeaders}_record_loss`
+                let request1, request2
+            if(label == 'home_over_6_'){
+                request1 = `home_over_${teamNameforOpposingHeaders}_record`
+                request2 = `home_under_${teamNameforOpposingHeaders}_record`
+            }else if(label == 'away_over_6_'){
+                request1 = `away_over_${teamNameforOpposingHeaders}_record`
+                request2 = `away_under_${teamNameforOpposingHeaders}_record`
+            }else if(label == 'home_puck_line_'){
+                request1 = `home_line_${teamNameforOpposingHeaders}_record_win`
+                request2 = `home_line_${teamNameforOpposingHeaders}_record_loss`
+            }else if(label == 'away_puck_line_'){
+                request1 = `away_line_${teamNameforOpposingHeaders}_record_win`
+                request2 = `away_line_${teamNameforOpposingHeaders}_record_loss`
+            }else{
+                request1 = `${label}${teamNameforOpposingHeaders}_record_win`
+                request2 = `${label}${teamNameforOpposingHeaders}_record_loss`
+            }
+
+              
+
 
             
                 div.lastChild.innerHTML = `${response[0][request1]} - ${response[0][request2]}`
@@ -528,7 +613,7 @@ function generate2Divs(data){
 
 function generateInitialDivs(data){
 
-    for(let j = 16; j < 20; j++){
+    for(let j = 16; j < iterations; j++){
         if(document.getElementById('team-2-data-container').contains(document.getElementById('team-2-container-' + j))){
             document.getElementById('team-2-container-' +  j).remove()
         }
@@ -580,7 +665,7 @@ function generateInitialDivs(data){
 
 function generateInitial2Divs(data){
 
-    for(let j = 16; j < 20; j++){
+    for(let j = 16; j < iterations; j++){
         if(document.getElementById('team-1-data-container').contains(document.getElementById('team-1-container-' + j))){
             document.getElementById('team-1-container-' +  j).remove()
         }
@@ -632,7 +717,7 @@ function generateInitial2Divs(data){
 // gonna have to manipulate data within here (gonna be like functions above)
 function getTrending(publicData, teamData){
 
-    for(let j = 16; j < 20; j++){
+    for(let j = 16; j < iterations; j++){
         if(document.getElementById('team-2-data-container').contains(document.getElementById('team-2-container-' + j))){
             document.getElementById('team-2-container-' +  j).remove()
         }
@@ -734,7 +819,7 @@ function getTrending(publicData, teamData){
 
 function getTrending2(publicData, teamData){
 
-    for(let j = 16; j < 20; j++){
+    for(let j = 16; j < iterations; j++){
         if(document.getElementById('team-1-data-container').contains(document.getElementById('team-1-container-' + j))){
             document.getElementById('team-1-container-' +  j).remove()
         }

@@ -7,6 +7,15 @@ edge cases CHI -110 DAL -110, CHI -120 DAL -110 betting 50 50
 will have to go through every function 
 
 
+// Adding Categories
+Change Lines 241, 324, 331, 413, 486, 493, 551, 603, 655, 757
+
+gonna make each category as the label then team name under like 
+Home Fave ML
+(Lightning)
+   1 - 0 
+
+
 // Finishing Touches
 Make sure spaces are consistent in css file
 Make sure typing style is consistent troughout all files
