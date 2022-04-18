@@ -2,7 +2,7 @@ const e = require('express');
 const res = require('express/lib/response');
 const { jsonp } = require('express/lib/response');
 const mysql = require('mysql')
-let actionjson = require('/Users/jesse/OneDrive/Desktop/projects/hindsite/testData.json');
+let actionjson = require('/Users/jesse/OneDrive/Desktop/projects/hindsite/actionNetworkData.json');
 let espnjson = require('/Users/jesse/OneDrive/Desktop/projects/hindsite/espnData.json') 
 
 // Create connection
@@ -176,7 +176,7 @@ function updateTeam170ML(espnObject, actionObject, awayWin, awayLoss, homeWin, h
     if(actionObject.away_opening_odds.includes('-') && Math.abs(parseInt(actionObject.away_opening_odds)) >= 170 && Math.abs(parseInt(actionObject.away_opening_odds)) < 200){
         espnObject.away_win ? awayWin++ : awayLoss++
     }else if(actionObject.home_opening_odds.includes('-') && Math.abs(parseInt(actionObject.home_opening_odds)) >= 170 && Math.abs(parseInt(actionObject.home_opening_odds)) < 200){
-        espnObject.home_win ? homeWin : home_170_ml_record_loss++
+        espnObject.home_win ? homeWin++ : homeLoss++
     }
 
     away170WinArr.push(awayWin)
@@ -528,10 +528,10 @@ function updateSelectedTeamDog(espnObject, actionObject, awayWin, awayLoss, home
 // }
 
 function sendHomeAwayData(){
-    console.log(away170WinArr)
-    console.log(away170LossArr)
-    console.log(home170WinArr)
-    console.log(home170LossArr)
+    // console.log(away170WinArr)
+    // console.log(away170LossArr)
+    // console.log(home170WinArr)
+    // console.log(home170LossArr)
 
     for(let i = 0; i < gameArray.length; i++){
 
@@ -550,6 +550,15 @@ function sendHomeAwayData(){
                                                 away_dog_ml_${tempTeam}_record_loss = ${teamAwayDogLossArr[i] + result[0][lossDog]}
            
                                                 WHERE team_name = '${gameArray[i].away_team}'`
+
+            // console.log('Array Win ' + teamAwayDogWinArr[i])
+            // console.log('Array Loss ' + teamAwayDogLossArr[i])
+
+
+            // console.log('Win ' + result[0][winDog])
+            // console.log('Loss ' + result[0][lossDog])
+            console.log(tempTeam + ' ' + result[0][winDog])
+
     
             db.query(sql, function (err, result) {  
                 if (err) throw err; 
@@ -576,10 +585,13 @@ function sendHomeAwayData(){
                                                 home_dog_ml_${tempTeam}_record_loss = ${teamHomeDogLossArr[i] + result[0][lossDog]}
            
                                                 WHERE team_name = '${gameArray[i].home_team}'`
+
+            console.log(tempTeam + ' ' + result[0][winDog])
+            
             db.query(sql, function (err, result) {  
                 if (err) throw err; 
                 
-            })   
+            }) 
         }) 
 
     }
@@ -669,7 +681,7 @@ function sendHomeAwayData(){
         let sql = `SELECT * FROM nhl_data where team_name = '${gameArray[i].home_team}'`
 
         let tempTeam = gameArray[i].away_team.toLowerCase().replace(' ', '_')
-        console.log(tempTeam)
+        //console.log(tempTeam)
 
 
         let opposingTeamWin = `away_ml_${tempTeam}_record_win`

@@ -1,0 +1,18 @@
+// Even Fave and Dog Odds
+home ml record
+away ml record 
+away over 
+home over
+away rival 
+home rival
+
+
+// Offset Fave and Dog Odds
+home ml record
+away ml record
+away over
+home over
+away line
+rival
+Fave
+dog

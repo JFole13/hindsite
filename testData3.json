@@ -1,0 +1,14 @@
+[
+  {
+    "_comment": "In between -170 and -200 odds",
+    "outcome": "Final",
+    "away_team": "Senators",
+    "home_team": "Blues",
+    "away_opening_odds": "+180",
+    "home_opening_odds": "-180",
+    "away_closing_odds": "-205",
+    "home_closing_odds": "+185",
+    "away_bets_percentage": "30",
+    "home_bets_percentage": "70"
+  }
+]

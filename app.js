@@ -42,7 +42,7 @@ app.get('/getteams', (req, res) => {
 
 // Select single post
 app.get('/getteam/:name', (req, res) => {
-    let sql = `SELECT * FROM nhl_data WHERE team_name='${req.params.name}'`
+    let sql = `SELECT * FROM nhl_data CROSS JOIN team_fave_record WHERE nhl_data.team_name='${req.params.name}' AND team_fave_record.team_name='${req.params.name}'`
     let query = db.query(sql, (err, result) => {
         if(err) throw err
         console.log(result)

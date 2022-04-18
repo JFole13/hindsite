@@ -1,0 +1,136 @@
+{
+    "content": [
+    {
+        "teamOneName": "Senators",
+        "teamOneColor": "d01b35",
+        "teamOneScore": "4",
+        "teamOneWinner": true,
+        "teamTwoName": "Blues",
+        "teamTwoColor": "073585",
+        "teamTwoScore": "1",
+        "teamTwoWinner": false,
+        "teamOneRecord": "20-31-5, 45 PTS",
+        "teamTwoRecord": "32-17-7, 71 PTS"
+        },
+        {
+        "teamOneName": "Stars",
+        "teamOneColor": "00704a",
+        "teamOneScore": "1",
+        "teamOneWinner": false,
+        "teamTwoName": "Predators",
+        "teamTwoColor": "fdba31",
+        "teamTwoScore": "2",
+        "teamTwoWinner": true,
+        "teamOneRecord": "32-21-3, 67 PTS",
+        "teamTwoRecord": "32-20-4, 68 PTS"
+        },
+        {
+        "teamOneName": "Rangers",
+        "teamOneColor": "0056ae",
+        "teamOneScore": "2",
+        "teamOneWinner": false,
+        "teamTwoName": "Wild",
+        "teamTwoColor": "004725",
+        "teamTwoScore": "5",
+        "teamTwoWinner": true,
+        "teamOneRecord": "36-16-5, 77 PTS",
+        "teamTwoRecord": "33-19-3, 69 PTS"
+        },
+        {
+        "teamOneName": "Lightning",
+        "teamOneColor": "003d7c",
+        "teamOneScore": "4",
+        "teamOneWinner": false,
+        "teamTwoName": "Jets",
+        "teamTwoColor": "133866",
+        "teamTwoScore": "7",
+        "teamTwoWinner": true,
+        "teamOneRecord": "37-13-6, 80 PTS",
+        "teamTwoRecord": "25-22-10, 60 PTS"
+        },
+        {
+        "teamOneName": "Avalanche",
+        "teamOneColor": "860038",
+        "teamOneScore": "3",
+        "teamOneWinner": false,
+        "teamTwoName": "Devils",
+        "teamTwoColor": "cd2427",
+        "teamTwoScore": "5",
+        "teamTwoWinner": true,
+        "teamOneRecord": "41-12-5, 87 PTS",
+        "teamTwoRecord": "21-31-5, 47 PTS"
+        },
+        {
+        "teamOneName": "Golden Knights",
+        "teamOneColor": "333f42",
+        "teamOneScore": "1",
+        "teamOneWinner": false,
+        "teamTwoName": "Flyers",
+        "teamTwoColor": "eb7131",
+        "teamTwoScore": "2",
+        "teamTwoWinner": true,
+        "teamOneRecord": "32-22-4, 68 PTS",
+        "teamTwoRecord": "18-28-10, 46 PTS"
+        },
+        {
+        "teamOneName": "Panthers",
+        "teamOneColor": "002a5c",
+        "teamOneScore": "4",
+        "teamOneWinner": true,
+        "teamTwoName": "Penguins",
+        "teamTwoColor": "231f20",
+        "teamTwoScore": "3",
+        "teamTwoWinner": false,
+        "teamOneRecord": "39-13-5, 83 PTS",
+        "teamTwoRecord": "34-15-9, 77 PTS"
+      },
+      {
+        "teamOneName": "Kraken",
+        "teamOneColor": "001628",
+        "teamOneScore": "4",
+        "teamOneWinner": false,
+        "teamTwoName": "Maple Leafs",
+        "teamTwoColor": "003e7e",
+        "teamTwoScore": "6",
+        "teamTwoWinner": true,
+        "teamOneRecord": "17-37-5, 39 PTS",
+        "teamTwoRecord": "37-16-4, 78 PTS"
+      },
+      {
+        "teamOneName": "Coyotes",
+        "teamOneColor": "770c1d",
+        "teamOneScore": "9",
+        "teamOneWinner": true,
+        "teamTwoName": "Red Wings",
+        "teamTwoColor": "e51937",
+        "teamTwoScore": "2",
+        "teamTwoWinner": false,
+        "teamOneRecord": "17-35-4, 38 PTS",
+        "teamTwoRecord": "24-27-6, 54 PTS"
+      },
+      {
+        "teamOneName": "Ducks",
+        "teamOneColor": "231f20",
+        "teamOneScore": "3",
+        "teamOneWinner": false,
+        "teamTwoName": "Blackhawks",
+        "teamTwoColor": "c8102e",
+        "teamTwoScore": "8",
+        "teamTwoWinner": true,
+        "teamOneRecord": "27-23-9, 63 PTS",
+        "teamTwoRecord": "21-29-8, 50 PTS"
+      },
+      {
+        "teamOneName": "Capitals",
+        "teamOneColor": "d01b35",
+        "teamOneScore": "5",
+        "teamOneWinner": true,
+        "teamTwoName": "Flames",
+        "teamTwoColor": "e51937",
+        "teamTwoScore": "4",
+        "teamTwoWinner": false,
+        "teamOneRecord": "31-18-9, 71 PTS",
+        "teamTwoRecord": "34-15-7, 75 PTS"
+      }
+    ]
+  }

@@ -1,0 +1,122 @@
+[
+    {
+        "_comment": "Even Fave Odds",
+        "outcome": "Final",
+        "away_team": "Senators",
+        "home_team": "Blues",
+        "away_opening_odds": "-110",
+        "home_opening_odds": "-110",
+        "away_closing_odds": "-110",
+        "home_closing_odds": "-110",
+        "away_bets_percentage": "30",
+        "home_bets_percentage": "70"
+    },
+    {
+        "_comment": "Even Dog Odds",
+        "outcome": "Final",
+        "away_team": "Stars",
+        "home_team": "Predators",
+        "away_opening_odds": "+110",
+        "home_opening_odds": "+110",
+        "away_closing_odds": "-205",
+        "home_closing_odds": "+185",
+        "away_bets_percentage": "30",
+        "home_bets_percentage": "70"
+    },
+    {
+        "_comment": "Offset Fave Odds",
+        "outcome": "Final",
+        "away_team": "Rangers",
+        "home_team": "Wild",
+        "away_opening_odds": "-110",
+        "home_opening_odds": "-103",
+        "away_closing_odds": "-205",
+        "home_closing_odds": "+185",
+        "away_bets_percentage": "30",
+        "home_bets_percentage": "70"
+    },
+    {
+        "_comment": "Offset Dog Odds",
+        "outcome": "Final",
+        "away_team": "Lightning",
+        "home_team": "Jets",
+        "away_opening_odds": "+110",
+        "home_opening_odds": "+130",
+        "away_closing_odds": "-205",
+        "home_closing_odds": "+185",
+        "away_bets_percentage": "30",
+        "home_bets_percentage": "70"
+    },
+    {
+      "_comment": "Exactly -170 odds",
+      "outcome": "Final",
+      "away_team": "Avalanche",
+      "home_team": "Devils",
+      "away_opening_odds": "-170",
+      "home_opening_odds": "+180",
+      "away_closing_odds": "-205",
+      "home_closing_odds": "+185",
+      "away_bets_percentage": "30",
+      "home_bets_percentage": "70"
+    },
+    {
+        "_comment": "In between -170 and -200 odds",
+        "outcome": "Final",
+        "away_team": "Golden Knights",
+        "home_team": "Flyers",
+        "away_opening_odds": "-180",
+        "home_opening_odds": "+180",
+        "away_closing_odds": "-205",
+        "home_closing_odds": "+185",
+        "away_bets_percentage": "30",
+        "home_bets_percentage": "70"
+    },
+    {
+        "_comment": "Exactly -200 odds",
+        "outcome": "Final",
+        "away_team": "Panthers",
+        "home_team": "Penguins",
+        "away_opening_odds": "-200",
+        "home_opening_odds": "+130",
+        "away_closing_odds": "-205",
+        "home_closing_odds": "+185",
+        "away_bets_percentage": "30",
+        "home_bets_percentage": "70"
+    },
+    {
+        "_comment": "Between -200 and -300 odds",
+        "outcome": "Final",
+        "away_team": "Kraken",
+        "home_team": "Maple Leafs",
+        "away_opening_odds": "-230",
+        "home_opening_odds": "+130",
+        "away_closing_odds": "-205",
+        "home_closing_odds": "+185",
+        "away_bets_percentage": "30",
+        "home_bets_percentage": "70"
+    },
+    {
+        "_comment": "Exactly -300 odds",
+        "outcome": "Final",
+        "away_team": "Coyotes",
+        "home_team": "Red Wings",
+        "away_opening_odds": "-300",
+        "home_opening_odds": "+230",
+        "away_closing_odds": "-205",
+        "home_closing_odds": "+185",
+        "away_bets_percentage": "30",
+        "home_bets_percentage": "70"
+    },
+    {
+        "_comment": "Over -300 odds",
+        "outcome": "Final",
+        "away_team": "Ducks",
+        "home_team": "Blackhawks",
+        "away_opening_odds": "-322",
+        "home_opening_odds": "+230",
+        "away_closing_odds": "-205",
+        "home_closing_odds": "+185",
+        "away_bets_percentage": "30",
+        "home_bets_percentage": "70"
+    }
+]

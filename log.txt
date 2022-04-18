@@ -26,3 +26,5 @@ Colors in css use hex code
 Import parsing functions from another file
 alphabetical in variable declaration, function call, etc.
 away/home declaration is consistent
+
+Write down step by step list for adding future columns

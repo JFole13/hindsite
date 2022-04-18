@@ -1,0 +1,136 @@
+{
+    "content": [
+    {
+        "teamOneName": "Senators",
+        "teamOneColor": "d01b35",
+        "teamOneScore": "1",
+        "teamOneWinner": false,
+        "teamTwoName": "Blues",
+        "teamTwoColor": "073585",
+        "teamTwoScore": "4",
+        "teamTwoWinner": true,
+        "teamOneRecord": "20-31-5, 45 PTS",
+        "teamTwoRecord": "32-17-7, 71 PTS"
+    },
+        {
+            "teamOneName": "Senators",
+            "teamOneColor": "d01b35",
+            "teamOneScore": "4",
+            "teamOneWinner": true,
+            "teamTwoName": "Blues",
+            "teamTwoColor": "073585",
+            "teamTwoScore": "1",
+            "teamTwoWinner": false,
+            "teamOneRecord": "20-31-5, 45 PTS",
+            "teamTwoRecord": "32-17-7, 71 PTS"
+        },
+        {
+            "teamOneName": "Senators",
+            "teamOneColor": "d01b35",
+            "teamOneScore": "4",
+            "teamOneWinner": true,
+            "teamTwoName": "Blues",
+            "teamTwoColor": "073585",
+            "teamTwoScore": "1",
+            "teamTwoWinner": false,
+            "teamOneRecord": "20-31-5, 45 PTS",
+            "teamTwoRecord": "32-17-7, 71 PTS"
+        },
+        {
+            "teamOneName": "Senators",
+            "teamOneColor": "d01b35",
+            "teamOneScore": "4",
+            "teamOneWinner": true,
+            "teamTwoName": "Blues",
+            "teamTwoColor": "073585",
+            "teamTwoScore": "1",
+            "teamTwoWinner": false,
+            "teamOneRecord": "20-31-5, 45 PTS",
+            "teamTwoRecord": "32-17-7, 71 PTS"
+        },
+        {
+            "teamOneName": "Senators",
+            "teamOneColor": "d01b35",
+            "teamOneScore": "4",
+            "teamOneWinner": true,
+            "teamTwoName": "Blues",
+            "teamTwoColor": "073585",
+            "teamTwoScore": "1",
+            "teamTwoWinner": false,
+            "teamOneRecord": "20-31-5, 45 PTS",
+            "teamTwoRecord": "32-17-7, 71 PTS"
+        },
+        {
+            "teamOneName": "Senators",
+            "teamOneColor": "d01b35",
+            "teamOneScore": "4",
+            "teamOneWinner": true,
+            "teamTwoName": "Blues",
+            "teamTwoColor": "073585",
+            "teamTwoScore": "1",
+            "teamTwoWinner": false,
+            "teamOneRecord": "20-31-5, 45 PTS",
+            "teamTwoRecord": "32-17-7, 71 PTS"
+        },
+        {
+            "teamOneName": "Senators",
+            "teamOneColor": "d01b35",
+            "teamOneScore": "4",
+            "teamOneWinner": true,
+            "teamTwoName": "Blues",
+            "teamTwoColor": "073585",
+            "teamTwoScore": "1",
+            "teamTwoWinner": false,
+            "teamOneRecord": "20-31-5, 45 PTS",
+            "teamTwoRecord": "32-17-7, 71 PTS"
+      },
+      {
+        "teamOneName": "Senators",
+        "teamOneColor": "d01b35",
+        "teamOneScore": "4",
+        "teamOneWinner": true,
+        "teamTwoName": "Blues",
+        "teamTwoColor": "073585",
+        "teamTwoScore": "1",
+        "teamTwoWinner": false,
+        "teamOneRecord": "20-31-5, 45 PTS",
+        "teamTwoRecord": "32-17-7, 71 PTS"
+      },
+      {
+        "teamOneName": "Senators",
+        "teamOneColor": "d01b35",
+        "teamOneScore": "4",
+        "teamOneWinner": true,
+        "teamTwoName": "Blues",
+        "teamTwoColor": "073585",
+        "teamTwoScore": "1",
+        "teamTwoWinner": false,
+        "teamOneRecord": "20-31-5, 45 PTS",
+        "teamTwoRecord": "32-17-7, 71 PTS"
+      },
+      {
+        "teamOneName": "Senators",
+        "teamOneColor": "d01b35",
+        "teamOneScore": "4",
+        "teamOneWinner": true,
+        "teamTwoName": "Blues",
+        "teamTwoColor": "073585",
+        "teamTwoScore": "1",
+        "teamTwoWinner": false,
+        "teamOneRecord": "20-31-5, 45 PTS",
+        "teamTwoRecord": "32-17-7, 71 PTS"
+      },
+      {
+        "teamOneName": "Senators",
+        "teamOneColor": "d01b35",
+        "teamOneScore": "1",
+        "teamOneWinner": false,
+        "teamTwoName": "Blues",
+        "teamTwoColor": "073585",
+        "teamTwoScore": "4",
+        "teamTwoWinner": true,
+        "teamOneRecord": "20-31-5, 45 PTS",
+        "teamTwoRecord": "32-17-7, 71 PTS"
+      }
+    ]
+  }

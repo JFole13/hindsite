@@ -32,7 +32,7 @@ const PublicColor = '44,40,44,0'
 
 const teams = document.querySelectorAll('select')
 
-const iterations = 30
+const iterations = 32
 
 for(let i = 0; i < teams.length; i++){
     teams[i].addEventListener('change', getTeamInfo)
@@ -203,10 +203,7 @@ function getTeamInfo(){
     }
 }
 
-function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return `rgba(${parseInt(result[1], 16)},${parseInt(result[2], 16)},${parseInt(result[3], 16)},1)`
-  }
+
   
 function generateDivs(data){
     
@@ -245,6 +242,7 @@ function generateDivs(data){
         containerCount = 19
     }
 
+    let anotherCount = 0
 
     for(i; i < containerCount; i++){
         div = document.createElement('div')
@@ -256,22 +254,26 @@ function generateDivs(data){
         }
 
         h3 =  document.createElement('h3')
+        h3Team = document.createElement('h3')
 
-        if(i > 18){
-            if(teamName == 'red_wings' || teamName == 'blue_jackets' || teamName == 'golden_knights' ||
-                teamName == 'maple_leafs'){
-                    let underScoreIndex = teamName.indexOf('_')
-                    h3.innerHTML = dataLables[count - 1] + ` (${teamName.charAt(underScoreIndex + 1).toUpperCase() + teamName.slice(underScoreIndex + 2)})`
-                }else{
-                    h3.innerHTML = dataLables[count - 1] + ` (${teamName.charAt(0).toUpperCase() + teamName.slice(1)})`
-                }
-        }else{
-            h3.innerHTML = dataLables[count - 1]
-        }
+        h3.innerHTML = dataLables[count - 1]
 
         p = document.createElement('p')
 
         if(i > 18){
+
+                
+                if(teamName == 'red_wings' || teamName == 'blue_jackets' || 
+                    teamName == 'golden_knights' || teamName == 'maple_leafs'){
+                    let underScoreIndex = teamName.indexOf('_')
+                    h3.innerHTML = dataLables[anotherCount] 
+                    h3Team.innerHTML = `(${teamName.charAt(underScoreIndex + 1).toUpperCase() + teamName.slice(underScoreIndex + 2)})`
+                }else{
+                    h3.innerHTML = dataLables[anotherCount]
+                    h3Team.innerHTML = ` (${teamName.charAt(0).toUpperCase() + teamName.slice(1)})`
+                }
+
+                anotherCount++
                 //split, to lower case it
                 let words = dataLables[count - 1].split(' ')
 
@@ -283,7 +285,6 @@ function generateDivs(data){
                     label = label.replace('>', '')
                     
                 }
-    
     
                 let request1, request2
                 if(label == 'home_over_6_'){
@@ -303,9 +304,6 @@ function generateDivs(data){
                     request2 = `${label}${teamName}_record_loss`
                 }
 
-                console.log(request1)
-                console.log(request2)
-
                 p.innerHTML = `${data[0][request1]} - ${data[0][request2]}`
             }else{
                 p.innerHTML = `${dataArray[2 * i - 3]} - ${dataArray[2 * i - 2]}`
@@ -313,6 +311,7 @@ function generateDivs(data){
         
         
         div.appendChild(h3)
+        div.appendChild(h3Team)
         div.appendChild(p)
         
         document.getElementById('team-1-data-container').appendChild(div)
@@ -336,12 +335,13 @@ function generateDivs(data){
             team = team.charAt(0).toUpperCase() + teamName.slice(1)
         }
 
+
         if(team != 'Trending' && team != 'Public'){
             fetch(`http://localhost:3000/getteam/${team}`)
             .then(function(response){
                 return response.json()
             }).then(function(response){
-                console.log(response)
+                //console.log(response)
 
                 for(let j = 16; j < iterations; j++){
                     if(document.getElementById('team-2-data-container').contains(document.getElementById('team-2-container-' + j))){
@@ -372,6 +372,10 @@ function generateDivs(data){
                     div.classList.add('data')
                     document.getElementById('team-2-data-container').appendChild(div)
                     div.appendChild(document.createElement('h3'))
+
+                    let h3Team = document.createElement('h3')
+                    div.appendChild(h3Team)
+
                     div.appendChild(document.createElement('p'))
 
                     let teamNameforOpposingHeaders = document.getElementById('teams-1').value 
@@ -379,11 +383,15 @@ function generateDivs(data){
                     if(teamNameforOpposingHeaders == 'red_wings' || teamNameforOpposingHeaders == 'blue_jackets' || 
                     teamNameforOpposingHeaders == 'golden_knights' || teamNameforOpposingHeaders == 'maple_leafs'){
                         let underScoreIndex = teamNameforOpposingHeaders.indexOf('_')
-                        div.firstChild.innerHTML = dataLables[anotherCount] + ` (${teamNameforOpposingHeaders.charAt(underScoreIndex + 1).toUpperCase() + teamNameforOpposingHeaders.slice(underScoreIndex + 2)})`
+                        div.firstChild.innerHTML = dataLables[anotherCount] 
+                        h3Team.innerHTML = `(${teamNameforOpposingHeaders.charAt(underScoreIndex + 1).toUpperCase() + teamNameforOpposingHeaders.slice(underScoreIndex + 2)})`
                     }else{
-                        div.firstChild.innerHTML = dataLables[anotherCount] + ` (${teamNameforOpposingHeaders.charAt(0).toUpperCase() + teamNameforOpposingHeaders.slice(1)})`
+                        div.firstChild.innerHTML = dataLables[anotherCount]
+                        h3Team.innerHTML = ` (${teamNameforOpposingHeaders.charAt(0).toUpperCase() + teamNameforOpposingHeaders.slice(1)})`
                     }
-                        
+
+                    //+ ` (${teamNameforOpposingHeaders.charAt(underScoreIndex + 1).toUpperCase() + teamNameforOpposingHeaders.slice(underScoreIndex + 2)})`
+                    //+ ` (${teamNameforOpposingHeaders.charAt(0).toUpperCase() + teamNameforOpposingHeaders.slice(1)})`    
                     let request1, request2
                     if(label == 'home_over_6_'){
                         request1 = `home_over_${teamNameforOpposingHeaders}_record`
@@ -401,6 +409,7 @@ function generateDivs(data){
                         request1 = `${label}${teamNameforOpposingHeaders}_record_win`
                         request2 = `${label}${teamNameforOpposingHeaders}_record_loss`
                     }
+
                 
                     div.lastChild.innerHTML = `${response[0][request1]} - ${response[0][request2]}`
 
@@ -438,36 +447,51 @@ function generate2Divs(data){
         dataLables = publicDataLabels
     }
 
-    
     let teamName = document.getElementById('teams-1').value
 
-    
 
+    let containerCount
+    if(teamName != 'trending' && teamName != 'public'){
+        containerCount = iterations + 3
+    }else{
+        containerCount = 19
+    }
+
+    
+  
     // count is for div naming
     let idCount = 0
     let count = 1
-    for(i; i < iterations + 3; i++){
+    let anotherCount = 0
+    for(i; i < containerCount; i++){
         div = document.createElement('div')
         div.classList.add('data')
         div.id = 'team-2-container-' + idCount
 
         h3 =  document.createElement('h3')
+        h3.innerHTML = dataLables[count - 1]
 
-        if(i > 18){
-            if(teamName == 'red_wings' || teamName == 'blue_jackets' || teamName == 'golden_knights' ||
-                teamName == 'maple_leafs'){
-                    let underScoreIndex = teamName.indexOf('_')
-                    h3.innerHTML = dataLables[count - 1] + ` (${teamName.charAt(underScoreIndex + 1).toUpperCase() + teamName.slice(underScoreIndex + 2)})`
-                }else{
-                    h3.innerHTML = dataLables[count - 1] + ` (${teamName.charAt(0).toUpperCase() + teamName.slice(1)})`
-                }
-        }else{
-            h3.innerHTML = dataLables[count - 1]
-        }
+        let h3Team = document.createElement('h3')
 
         p = document.createElement('p')
+
+      
        
         if(i > 18){
+
+
+            if(teamName == 'red_wings' || teamName == 'blue_jackets' || 
+                    teamName == 'golden_knights' || teamName == 'maple_leafs'){
+                    let underScoreIndex = teamName.indexOf('_')
+                    h3.innerHTML = dataLables[anotherCount] 
+                    h3Team.innerHTML = `(${teamName.charAt(underScoreIndex + 1).toUpperCase() + teamName.slice(underScoreIndex + 2)})`
+                }else{
+                    h3.innerHTML = dataLables[anotherCount]
+                    h3Team.innerHTML = ` (${teamName.charAt(0).toUpperCase() + teamName.slice(1)})`
+            }
+            
+            anotherCount++
+            
             //split, to lower case it
             let words = dataLables[count - 1].split(' ')
 
@@ -498,15 +522,13 @@ function generate2Divs(data){
                 request2 = `${label}${teamName}_record_loss`
             }
 
-            console.log(request1)
-            console.log(request2)
-
             p.innerHTML = `${data[0][request1]} - ${data[0][request2]}`
         }else{
             p.innerHTML = `${dataArray[2 * i - 3]} - ${dataArray[2 * i - 2]}`
         }
         
         div.appendChild(h3)
+        div.appendChild(h3Team)
         div.appendChild(p)
         
         document.getElementById('team-2-data-container').appendChild(div)
@@ -528,87 +550,98 @@ function generate2Divs(data){
             team = team.charAt(0).toUpperCase() + teamName.slice(1)
         }
 
-        fetch(`http://localhost:3000/getteam/${team}`)
-        .then(function(response){
-            return response.json()
-        }).then(function(response){
+        if(team != 'Trending' && team != 'Public'){
+            fetch(`http://localhost:3000/getteam/${team}`)
+            .then(function(response){
+                return response.json()
+            }).then(function(response){
 
-            for(let j = 16; j < iterations; j++){
-                if(document.getElementById('team-1-data-container').contains(document.getElementById('team-1-container-' + j))){
-                 document.getElementById('team-1-container-' + j).remove()
+                for(let j = 16; j < iterations; j++){
+                    if(document.getElementById('team-1-data-container').contains(document.getElementById('team-1-container-' + j))){
+                    document.getElementById('team-1-container-' + j).remove()
+                    }
                 }
-            }
 
-            let anotherCount = 0
-            for(let i = 16; i < iterations; i++){
+                let anotherCount = 0
+                for(let i = 16; i < iterations; i++){
 
 
-                let words = dataLables[anotherCount].split(' ')
+                    let words = dataLables[anotherCount].split(' ')
 
-                let label = ''
-                for(let x = 0; x < words.length; x++){
+                    let label = ''
+                    for(let x = 0; x < words.length; x++){
 
-                    label += words[x].toLowerCase() + '_'
-                    label = label.replace('-', '')
-                    label = label.replace('>', '')
+                        label += words[x].toLowerCase() + '_'
+                        label = label.replace('-', '')
+                        label = label.replace('>', '')
+                        
+                    }
+
+
+
+                    let div = document.createElement('div')
+                    div.id = 'team-1-container-' + i
+
+                    if(i % 3 == 2){
+                        div.style.borderRight = '1px solid #3C3D4C'
+                    }
+
+                    div.classList.add('data')
+                    document.getElementById('team-1-data-container').appendChild(div)
+                    div.appendChild(document.createElement('h3'))
+
+                    let h3Team = document.createElement('h3')
+                    div.appendChild(h3Team)
+
+
+                    div.appendChild(document.createElement('p'))
+
+                    let teamNameforOpposingHeaders = document.getElementById('teams-2').value 
+                    
+                    if(teamNameforOpposingHeaders == 'red_wings' || teamNameforOpposingHeaders == 'blue_jackets' || 
+                    teamNameforOpposingHeaders == 'golden_knights' || teamNameforOpposingHeaders == 'maple_leafs'){
+                        let underScoreIndex = teamNameforOpposingHeaders.indexOf('_')
+                        div.firstChild.innerHTML = dataLables[anotherCount]
+                        h3Team.innerHTML = `(${teamNameforOpposingHeaders.charAt(underScoreIndex + 1).toUpperCase() + teamNameforOpposingHeaders.slice(underScoreIndex + 2)})`
+                    }else{
+                        div.firstChild.innerHTML = dataLables[anotherCount]
+                        h3Team.innerHTML = ` (${teamNameforOpposingHeaders.charAt(0).toUpperCase() + teamNameforOpposingHeaders.slice(1)})`
+                    }
+                    
+                    //+ ` (${teamNameforOpposingHeaders.charAt(underScoreIndex + 1).toUpperCase() + teamNameforOpposingHeaders.slice(underScoreIndex + 2)})`
+                    //+ ` (${teamNameforOpposingHeaders.charAt(0).toUpperCase() + teamNameforOpposingHeaders.slice(1)})`
+                    let request1, request2
+                if(label == 'home_over_6_'){
+                    request1 = `home_over_${teamNameforOpposingHeaders}_record`
+                    request2 = `home_under_${teamNameforOpposingHeaders}_record`
+                }else if(label == 'away_over_6_'){
+                    request1 = `away_over_${teamNameforOpposingHeaders}_record`
+                    request2 = `away_under_${teamNameforOpposingHeaders}_record`
+                }else if(label == 'home_puck_line_'){
+                    request1 = `home_line_${teamNameforOpposingHeaders}_record_win`
+                    request2 = `home_line_${teamNameforOpposingHeaders}_record_loss`
+                }else if(label == 'away_puck_line_'){
+                    request1 = `away_line_${teamNameforOpposingHeaders}_record_win`
+                    request2 = `away_line_${teamNameforOpposingHeaders}_record_loss`
+                }else{
+                    request1 = `${label}${teamNameforOpposingHeaders}_record_win`
+                    request2 = `${label}${teamNameforOpposingHeaders}_record_loss`
+                }
+                
+                    div.lastChild.innerHTML = `${response[0][request1]} - ${response[0][request2]}`
+
+                    console.log(label)
+                    console.log(response[0][request1])
+                    console.log(response[0][request2])
+
+
+                    anotherCount++
                     
                 }
-
-
-
-                let div = document.createElement('div')
-                div.id = 'team-1-container-' + i
-
-                if(i % 3 == 2){
-                    div.style.borderRight = '1px solid #3C3D4C'
-                }
-
-                div.classList.add('data')
-                document.getElementById('team-1-data-container').appendChild(div)
-                div.appendChild(document.createElement('h3'))
-                div.appendChild(document.createElement('p'))
-
-                let teamNameforOpposingHeaders = document.getElementById('teams-2').value 
-                
-                if(teamNameforOpposingHeaders == 'red_wings' || teamNameforOpposingHeaders == 'blue_jackets' || 
-                teamNameforOpposingHeaders == 'golden_knights' || teamNameforOpposingHeaders == 'maple_leafs'){
-                    let underScoreIndex = teamNameforOpposingHeaders.indexOf('_')
-                    div.firstChild.innerHTML = dataLables[anotherCount] + ` (${teamNameforOpposingHeaders.charAt(underScoreIndex + 1).toUpperCase() + teamNameforOpposingHeaders.slice(underScoreIndex + 2)})`
-                }else{
-                    div.firstChild.innerHTML = dataLables[anotherCount] + ` (${teamNameforOpposingHeaders.charAt(0).toUpperCase() + teamNameforOpposingHeaders.slice(1)})`
-                }
-                
-                
-                let request1, request2
-            if(label == 'home_over_6_'){
-                request1 = `home_over_${teamNameforOpposingHeaders}_record`
-                request2 = `home_under_${teamNameforOpposingHeaders}_record`
-            }else if(label == 'away_over_6_'){
-                request1 = `away_over_${teamNameforOpposingHeaders}_record`
-                request2 = `away_under_${teamNameforOpposingHeaders}_record`
-            }else if(label == 'home_puck_line_'){
-                request1 = `home_line_${teamNameforOpposingHeaders}_record_win`
-                request2 = `home_line_${teamNameforOpposingHeaders}_record_loss`
-            }else if(label == 'away_puck_line_'){
-                request1 = `away_line_${teamNameforOpposingHeaders}_record_win`
-                request2 = `away_line_${teamNameforOpposingHeaders}_record_loss`
-            }else{
-                request1 = `${label}${teamNameforOpposingHeaders}_record_win`
-                request2 = `${label}${teamNameforOpposingHeaders}_record_loss`
-            }
-
-              
-
-
-            
-                div.lastChild.innerHTML = `${response[0][request1]} - ${response[0][request2]}`
-
-                anotherCount++
-                
-            }
-        }).catch(error => {
-            throw error
-        });
+            }).catch(error => {
+                throw error
+            });
+        }
 }
 
 function generateInitialDivs(data){
@@ -940,3 +973,8 @@ function insertionSort(arr){
 
   return arr;
 }
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return `rgba(${parseInt(result[1], 16)},${parseInt(result[2], 16)},${parseInt(result[3], 16)},1)`
+  }

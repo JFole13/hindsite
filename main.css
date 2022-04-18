@@ -77,4 +77,10 @@ img{
 
 h3{
     text-align: center;
+    display: block;
 }
+/* 
+#team-1-data-container div:nth-child(even), #team-2-data-container div:nth-child(even){
+    background: rgb(75,62,62);
+background: linear-gradient(180deg, rgba(75,62,62,1) 0%, rgba(121,121,121,0.7178221630449055) 100%);
+} */
