@@ -32,7 +32,7 @@ app.all('/', function(req, res, next) {
 
 // Select posts
 app.get('/getteams', (req, res) => {
-    let sql = 'SELECT * FROM nhl_data'
+    let sql = 'SELECT * FROM nhl_data CROSS JOIN team_fave_record WHERE nhl_data.team_name = team_fave_record.team_name'
     let query = db.query(sql, (err, results) => {
         if(err) throw err
         console.log(results)

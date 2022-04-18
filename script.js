@@ -10,7 +10,7 @@ fetch('http://localhost:3000/getpublic')
                 .then(function(response2){
                     return response2.json()
                 }).then(function(response2){
-                    //getTrending2(response, response2)
+                    getTrending2(response, response2)
                 }).catch(error => {
                     throw error
                 });
@@ -142,7 +142,7 @@ function getTeamInfo(){
                     .then(function(response2){
                         return response2.json()
                     }).then(function(response2){
-                        //getTrending(response, response2)
+                        getTrending(response, response2)
                     }).catch(error => {
                         throw error
                     });
@@ -176,7 +176,7 @@ function getTeamInfo(){
                     .then(function(response2){
                         return response2.json()
                     }).then(function(response2){
-                        //getTrending2(response, response2)
+                        getTrending2(response, response2)
                     }).catch(error => {
                         throw error
                     });
@@ -947,7 +947,7 @@ function getTrending2(publicData, teamData){
     // console.log(publicPercentagesArr)
     // console.log(sortedPercentagesArr)
     // console.log(publicDataArray)
-    // console.log(TeamDataArray)
+     console.log(TeamDataArray)
     
     //console.log(data[0])
 }

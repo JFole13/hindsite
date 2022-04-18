@@ -539,8 +539,8 @@ function sendHomeAwayData(){
 
         let tempTeam = gameArray[i].home_team.toLowerCase().replace(' ', '_')
 
-        let winDog = `home_dog_ml_${tempTeam}_record_win`
-        let lossDog = `home_dog_ml_${tempTeam}_record_loss`
+        let winDog = `away_dog_ml_${tempTeam}_record_win`
+        let lossDog = `away_dog_ml_${tempTeam}_record_loss`
 
         db.query(sql, function (err, result) {  
             if (err) throw err;  
@@ -550,14 +550,6 @@ function sendHomeAwayData(){
                                                 away_dog_ml_${tempTeam}_record_loss = ${teamAwayDogLossArr[i] + result[0][lossDog]}
            
                                                 WHERE team_name = '${gameArray[i].away_team}'`
-
-            // console.log('Array Win ' + teamAwayDogWinArr[i])
-            // console.log('Array Loss ' + teamAwayDogLossArr[i])
-
-
-            // console.log('Win ' + result[0][winDog])
-            // console.log('Loss ' + result[0][lossDog])
-            console.log(tempTeam + ' ' + result[0][winDog])
 
     
             db.query(sql, function (err, result) {  
@@ -574,8 +566,8 @@ function sendHomeAwayData(){
 
         let tempTeam = gameArray[i].away_team.toLowerCase().replace(' ', '_')
 
-        let winDog = `away_dog_ml_${tempTeam}_record_win`
-        let lossDog = `away_dog_ml_${tempTeam}_record_loss`
+        let winDog = `home_dog_ml_${tempTeam}_record_win`
+        let lossDog = `home_dog_ml_${tempTeam}_record_loss`
 
         db.query(sql, function (err, result) {  
             if (err) throw err;  
@@ -586,7 +578,7 @@ function sendHomeAwayData(){
            
                                                 WHERE team_name = '${gameArray[i].home_team}'`
 
-            console.log(tempTeam + ' ' + result[0][winDog])
+         
             
             db.query(sql, function (err, result) {  
                 if (err) throw err; 
