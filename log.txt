@@ -28,3 +28,7 @@ alphabetical in variable declaration, function call, etc.
 away/home declaration is consistent
 
 Write down step by step list for adding future columns
+
+// Sections to Refactor
+
+Red Wings Check for Trending Data

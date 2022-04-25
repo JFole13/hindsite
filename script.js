@@ -826,7 +826,11 @@ function getTrending(publicData, teamData){
 
         let temp
         if(title[0] == ''){
-            temp = title[1] + " " + title[2]
+            if(parseInt(title[1]) < 170){
+                temp = title[1] + "%> " + title[2]
+            }else{
+                temp = '-' + title[1] + '> ' + title[2]
+            }
         }else{
             temp = title[0] + " " + title[1]
         }
@@ -860,6 +864,7 @@ function getTrending2(publicData, teamData){
 
     let data = []
     let publicDataArray = []
+    let tData = []
     let TeamDataArray = []
     for(const [key, value] of Object.entries(publicData[0])){
         if(key != 'id'){
@@ -873,34 +878,103 @@ function getTrending2(publicData, teamData){
         }
     }
 
+    // for(const [key, value] of Object.entries(teamData[0])){
+    //     if(key != 'id'){
+    //         TeamDataArray.push(value)
+    //     }
+    // }
+
     for(const [key, value] of Object.entries(teamData)){
         if(key != 'id'){
-            TeamDataArray.push(value)
+            tData.push(value)
         }
     }
 
+    // console.log(publicDataArray)
+    // console.log(data)
+    // console.log(tData[0])
+
     let publicPercentagesArr = []
+    let teamPercentagesArr = []
 
     let tempObject
     for(let i = 0; i < publicDataArray.length  / 2; i++){
-        //dataArray[2 * i - 2] / (dataArray[2 * i - 2] + dataArray[2 * i - 1])
         if((publicDataArray[2 * i] + publicDataArray[2 * i + 1]) != 0){
             tempObject = {"title": Object.keys(data[0])[2 * i + 1], 
                           "percentage" : publicDataArray[2 * i] / (publicDataArray[2 * i] + publicDataArray[2 * i + 1])}
-
-            
-            //publicPercentagesArr.push(publicDataArray[2 * i] / (publicDataArray[2 * i] + publicDataArray[2 * i + 1]))
         }else{
             tempObject = {"title": Object.keys(data[0])[2 * i + 1], 
                           "percentage" : 0}       
-            //publicPercentagesArr.push(0)
         }
-
         publicPercentagesArr.push(tempObject)
-        //console.log(publicDataArray[2 * i] / (publicDataArray[2 * i] + publicDataArray[2 * i + 1]))
-        // zero check
     }
 
+    let tempArr = []
+    for (const record in tData[0]) {
+        //console.log(`${record}: ${tData[0][record]}`);
+        if(record.includes('win') || (record.includes('over'))){
+            if(record.includes('wings')){
+                if(record.includes('loss') || record.includes('under')){
+
+                }else{
+
+                    tempArr.push(tData[0][record])
+                }
+            }else{
+                tempArr.push(tData[0][record])
+            }
+        }
+        
+        if(record.includes('loss') || record.includes('under')){
+            if(record.includes('wings')){
+                let count = (record.match(/win/g) || []).length 
+                if(count > 1){
+                    
+                }else{
+                    tempArr.push(tData[0][record])
+                }
+            }else{
+                tempArr.push(tData[0][record])
+            }
+
+            // fix the divide by sero thing
+            if(tempArr[0] / (tempArr[0] + tempArr[1]) == 0 || (tempArr[0] == 0 && tempArr[1] == 0)){
+                tempObject={'title': record,
+                            'percentage' : 0}
+
+            }else{
+                tempObject={'title': record,
+                'percentage' : tempArr[0] / (tempArr[0] + tempArr[1])}
+            }
+
+            console.log(record)
+            console.log(tempArr)
+
+            teamPercentagesArr.push(tempObject)
+
+            tempArr = []
+        }
+
+        
+    }
+
+    // for(let i = 4; i < Object.keys(tData[0]).length; i++){
+    //     //console.log(Object.keys(tData[0])[i])
+    //     console.log(tData[0].id)
+
+    //     // for(let j = 0; j < Object.keys(tData[i]).length / 2; j++){
+    //     //         if((tData[2 * i] + tData[2 * i + 1]) != 0){
+    //     //         tempObject = {"title": Object.keys(tData[0])[2 * i + 1], 
+    //     //                       "percentage" : tData[2 * i] / (tData[2 * i] + tData[2 * i + 1])}
+    //     //     }else{
+    //     //         tempObject = {"title": Object.keys(tData[0])[2 * i + 1], 
+    //     //                       "percentage" : 0}       
+    //     //     }
+    //     //     teamPercentagesArr.push(tempObject)
+    //     // }
+    // }
+
+    console.log(teamPercentagesArr)
     sortedPercentagesArr = insertionSort(publicPercentagesArr)
 
     let count = 1
@@ -908,11 +982,12 @@ function getTrending2(publicData, teamData){
         div = document.createElement('div')
         div.classList.add('data')
         div.id = 'team-2-container-' + count
-        div.style.background = 'rgba(76, 175, 80, 0.5)'
+        div.style.background = 'linear-gradient(180deg, rgba(61,255,0,0.18) 0%, rgba(61,255,0,0.18) 100%)'
 
         h3 =  document.createElement('h3')
 
         let title = sortedPercentagesArr[i].title.split("_")
+
 
         for (let i = 0; i < title.length; i++) {
             if(title[i] == "ml"){
@@ -928,10 +1003,21 @@ function getTrending2(publicData, teamData){
 
         let temp
         if(title[0] == ''){
-            temp = title[1] + " " + title[2]
+            if(parseInt(title[1]) < 170){
+                temp = title[1] + "%> " + title[2]
+            }else{
+                temp = '-' + title[1] + '> ' + title[2]
+            }
+            
         }else{
             temp = title[0] + " " + title[1]
         }
+
+
+
+        // if(temp[0] <= 3 && isNum){
+        //     temp = 
+        // }
 
         h3.innerHTML = temp
         p = document.createElement('p')
@@ -942,12 +1028,15 @@ function getTrending2(publicData, teamData){
         document.getElementById('team-2-data-container').appendChild(div)
     }
 
+
+
+
     // create object with key and value in 
 
     // console.log(publicPercentagesArr)
     // console.log(sortedPercentagesArr)
     // console.log(publicDataArray)
-     console.log(TeamDataArray)
+    // console.log(TeamDataArray)
     
     //console.log(data[0])
 }
