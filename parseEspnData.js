@@ -560,6 +560,8 @@ function sendHomeAwayData(){
 
     }
 
+    
+
     for(let i = 0; i < gameArray.length; i++){
 
         let sql = `SELECT * FROM team_fave_record where team_name = '${gameArray[i].home_team}'`
@@ -595,20 +597,20 @@ function sendHomeAwayData(){
         let tempTeam = gameArray[i].home_team.toLowerCase().replace(' ', '_')
         //console.log(tempTeam)
         // = tempTeam.join('_').toLowerCase()
-        let opposingTeamWin = `home_ml_${tempTeam}_record_win`
-        let opposingTeamLoss = `home_ml_${tempTeam}_record_loss`
-        let win170 = `home_170_ml_${tempTeam}_record_win`
-        let loss170 = `home_170_ml_${tempTeam}_record_loss`
-        let win200 = `home_200_ml_${tempTeam}_record_win`
-        let loss200 = `home_200_ml_${tempTeam}_record_loss`
-        let winOver = `home_over_${tempTeam}_record`
-        let lossUnder = `home_under_${tempTeam}_record`
-        let winLine = `home_line_${tempTeam}_record_win`
-        let lossLine = `home_line_${tempTeam}_record_loss`
-        let winRival = `home_rivals_ml_${tempTeam}_record_win`
-        let lossRival = `home_rivals_ml_${tempTeam}_record_loss`
-        let winFave = `home_fave_ml_${tempTeam}_record_win`
-        let lossFave = `home_fave_ml_${tempTeam}_record_loss`
+        let opposingTeamWin = `away_ml_${tempTeam}_record_win`
+        let opposingTeamLoss = `away_ml_${tempTeam}_record_loss`
+        let win170 = `away_170_ml_${tempTeam}_record_win`
+        let loss170 = `away_170_ml_${tempTeam}_record_loss`
+        let win200 = `away_200_ml_${tempTeam}_record_win`
+        let loss200 = `away_200_ml_${tempTeam}_record_loss`
+        let winOver = `away_over_${tempTeam}_record`
+        let lossUnder = `away_under_${tempTeam}_record`
+        let winLine = `away_line_${tempTeam}_record_win`
+        let lossLine = `away_line_${tempTeam}_record_loss`
+        let winRival = `away_rivals_ml_${tempTeam}_record_win`
+        let lossRival = `away_rivals_ml_${tempTeam}_record_loss`
+        let winFave = `away_fave_ml_${tempTeam}_record_win`
+        let lossFave = `away_fave_ml_${tempTeam}_record_loss`
 
 
 
@@ -668,6 +670,7 @@ function sendHomeAwayData(){
                 }) 
     }
 
+
     for(let i = 0; i < gameArray.length; i++){
 
         let sql = `SELECT * FROM nhl_data where team_name = '${gameArray[i].home_team}'`
@@ -676,20 +679,20 @@ function sendHomeAwayData(){
         //console.log(tempTeam)
 
 
-        let opposingTeamWin = `away_ml_${tempTeam}_record_win`
-        let opposingTeamLoss = `away_ml_${tempTeam}_record_loss`
-        let win170 = `away_170_ml_${tempTeam}_record_win`
-        let loss170 = `away_170_ml_${tempTeam}_record_loss`
-        let win200 = `away_200_ml_${tempTeam}_record_win`
-        let loss200 = `away_200_ml_${tempTeam}_record_loss`
-        let winOver = `away_over_${tempTeam}_record`
-        let lossUnder = `away_under_${tempTeam}_record`
-        let winLine = `away_line_${tempTeam}_record_win`
-        let lossLine = `away_line_${tempTeam}_record_loss`
-        let winRival = `away_rivals_ml_${tempTeam}_record_win`
-        let lossRival = `away_rivals_ml_${tempTeam}_record_loss`
-        let winFave = `away_fave_ml_${tempTeam}_record_win`
-        let lossFave = `away_fave_ml_${tempTeam}_record_loss`
+        let opposingTeamWin = `home_ml_${tempTeam}_record_win`
+        let opposingTeamLoss = `home_ml_${tempTeam}_record_loss`
+        let win170 = `home_170_ml_${tempTeam}_record_win`
+        let loss170 = `home_170_ml_${tempTeam}_record_loss`
+        let win200 = `home_200_ml_${tempTeam}_record_win`
+        let loss200 = `home_200_ml_${tempTeam}_record_loss`
+        let winOver = `home_over_${tempTeam}_record`
+        let lossUnder = `home_under_${tempTeam}_record`
+        let winLine = `home_line_${tempTeam}_record_win`
+        let lossLine = `home_line_${tempTeam}_record_loss`
+        let winRival = `home_rivals_ml_${tempTeam}_record_win`
+        let lossRival = `home_rivals_ml_${tempTeam}_record_loss`
+        let winFave = `home_fave_ml_${tempTeam}_record_win`
+        let lossFave = `home_fave_ml_${tempTeam}_record_loss`
 
 
         db.query(sql, function (err, result) {  
